@@ -4,10 +4,15 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.utils.Array;
+import com.richikin.asteroids.core.App;
 import com.richikin.asteroids.enums.ScreenID;
+import com.richikin.asteroids.enums.StateID;
+import com.richikin.asteroids.graphics.Gfx;
 import com.richikin.asteroids.input.ControllerPos;
 import com.richikin.asteroids.input.ControllerType;
 import com.richikin.asteroids.input.Switch;
+import com.richikin.asteroids.utils.Developer;
+import com.richikin.asteroids.utils.Trace;
 
 public class AppConfig
 {
@@ -28,23 +33,127 @@ public class AppConfig
 
     // ------------------------------------------------------------------------
 
+    private StateID startupState;
+
+    // ------------------------------------------------------------------------
+
+    public AppConfig()
+    {
+        Trace.checkPoint();
+
+        startupState = StateID._STATE_BEGIN_STARTUP;
+    }
+
     public void setup()
     {
+        Trace.checkPoint();
+
+        App.createEssentialObjects();
+
+        // ------------------------------------------------
+        Developer.setDeveloperModeState();
+        Developer.setTempDeveloperSettings();
+        // ------------------------------------------------
+
+        Gfx.initialise();
+
+        isShuttingMainScene = false;
+        forceQuitToMenu     = false;
+        gamePaused          = false;
+        camerasReady        = false;
+        shutDownActive      = false;
+        entitiesExist       = false;
+        controllersFitted   = false;
+        gameButtonsReady    = false;
+        currentController   = "None";
+        availableInputs     = new Array<>();
+
+        if ( isDesktopApp() )
+        {
+            Gdx.graphics.setWindowedMode( Gfx.DESKTOP_WIDTH, Gfx.DESKTOP_HEIGHT );
+        }
+
+        virtualControllerPos = ControllerPos._HIDDEN;
+
+        setControllerTypes();
+
+        systemBackButton = new Switch();
+
+        Stats.setup( "com.richikin.asteroids.meters" );
+
+        //
+        // These essential objects have now been created.
+        // Setup/Initialise for any essential objects required
+        // before TitleScene can be created is mostly
+        // performed in startApp().
+    }
+
+    public void startApp()
+    {
+        Trace.checkPoint();
+
+        App.getBox2DHelper().createWorld();
+        App.getAssets().initialise();
+        App.getSettings().freshInstallCheck();
+        App.getSettings().debugReport();
+
+        // ------------------------------------------------------------------
+        // Google Play Services setup - Android only.
+        if ( isAndroidApp() )
+        {
+            Trace.dbg( "Initialising Google Play Services." );
+        }
+        // ------------------------------------------------------------------
+
+        App.getGameRenderer().createCameras();
+        App.createStage( App.getGameRenderer().getHudGameCamera().viewport );
+        App.getBox2DHelper().createB2DRenderer();
+
+        startupState = StateID._STATE_END_STARTUP;
+
+        Trace.divider();
+    }
+
+    public void closeStartup()
+    {
+        Developer.configReport();
+    }
+
+    public boolean isStartupDone()
+    {
+        return ( startupState == StateID._STATE_END_STARTUP );
     }
 
     // ------------------------------------------------------------------------
 
-    /**
-     *
-     */
     public boolean gameScreenActive()
     {
         return currentScreenID == ScreenID._GAME_SCREEN;
     }
 
-    /**
-     * @return
-     */
+    public void setControllerTypes()
+    {
+        if ( isAndroidApp() || Developer.isAndroidOnDesktop() )
+        {
+            Trace.dbg( "Enabling _VIRTUAL controller." );
+
+            availableInputs.add( ControllerType._BUTTONS );
+
+            if ( Developer.isAndroidOnDesktop() )
+            {
+                availableInputs.add( ControllerType._KEYBOARD );
+            }
+        }
+        else
+        {
+            Trace.dbg( "Enabling _EXTERNAL controller." );
+            Trace.dbg( "Enabling _KEYBOARD controller." );
+
+            availableInputs.add( ControllerType._EXTERNAL );
+            availableInputs.add( ControllerType._KEYBOARD );
+        }
+    }
+
     public boolean isUsingOnScreenControls()
     {
         return ( availableInputs.contains( ControllerType._JOYSTICK, true )
@@ -52,12 +161,34 @@ public class AppConfig
             || availableInputs.contains( ControllerType._BUTTONS, true ) );
     }
 
-    /**
-     * @return TRUE If an external controller is fitted
-     */
-    public boolean isControllerFitted()
+    public boolean isExternalControllerFitted()
     {
         return controllersFitted;
+    }
+
+    public void addBackButton( String _default, String _pressed )
+    {
+//        Scene2DUtils scene2DUtils = new Scene2DUtils();
+//
+//        backButton = scene2DUtils.addButton( _default, _pressed, 0, 0 );
+    }
+
+    public void showAndEnableBackButton()
+    {
+        if ( backButton != null )
+        {
+            backButton.setVisible( true );
+            backButton.setDisabled( false );
+        }
+    }
+
+    public void hideAndDisableBackButton()
+    {
+        if ( backButton != null )
+        {
+            backButton.setVisible( false );
+            backButton.setDisabled( true );
+        }
     }
 
     /**

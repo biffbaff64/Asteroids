@@ -162,8 +162,8 @@ public class Settings implements Disposable
             prefs.putBoolean( _SPRITE_BOXES, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _TILE_BOXES, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _BUTTON_BOXES, _PREF_FALSE_DEFAULT );
-            prefs.putBoolean( _SHOW_FPS, App.appConfig.isDesktopApp() ? _PREF_TRUE_DEFAULT : _PREF_FALSE_DEFAULT );
-            prefs.putBoolean( _SHOW_DEBUG, App.appConfig.isDesktopApp() ? _PREF_TRUE_DEFAULT : _PREF_FALSE_DEFAULT );
+            prefs.putBoolean( _SHOW_FPS, App.getAppConfig().isDesktopApp() ? _PREF_TRUE_DEFAULT : _PREF_FALSE_DEFAULT );
+            prefs.putBoolean( _SHOW_DEBUG, App.getAppConfig().isDesktopApp() ? _PREF_TRUE_DEFAULT : _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _SPAWNPOINTS, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _MENU_HEAPS, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _CULL_SPRITES, _PREF_TRUE_DEFAULT );

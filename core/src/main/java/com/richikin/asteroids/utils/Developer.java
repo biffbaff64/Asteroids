@@ -48,12 +48,12 @@ public class Developer
 
             for ( String str : disableList )
             {
-                App.settings.disable( str );
+                App.getSettings().disable( str );
             }
 
             for ( String str : enableList )
             {
-                App.settings.enable( str );
+                App.getSettings().enable( str );
             }
 
             Trace.divider();
@@ -67,7 +67,7 @@ public class Developer
      */
     public static void setDeveloperModeState()
     {
-        if ( App.appConfig.isDesktopApp() )
+        if ( App.getAppConfig().isDesktopApp() )
         {
             isDevMode = "TRUE".equalsIgnoreCase( System.getenv( "_DEV_MODE" ) );
         }
@@ -120,7 +120,7 @@ public class Developer
      */
     public static boolean isDevMode()
     {
-        return App.appConfig.isDesktopApp() && isDevMode;
+        return App.getAppConfig().isDesktopApp() && isDevMode;
     }
 
     /**
@@ -178,8 +178,8 @@ public class Developer
         if ( isDevMode() )
         {
             Trace.divider();
-            Trace.dbg( "Android App         : " + App.appConfig.isAndroidApp() );
-            Trace.dbg( "Desktop App         : " + App.appConfig.isDesktopApp() );
+            Trace.dbg( "Android App         : " + App.getAppConfig().isAndroidApp() );
+            Trace.dbg( "Desktop App         : " + App.getAppConfig().isDesktopApp() );
             Trace.divider();
             Trace.dbg( "isDevMode()         : " + isDevMode() );
             Trace.dbg( "isGodMode()         : " + isGodMode() );
@@ -197,12 +197,12 @@ public class Developer
             Trace.divider();
             Trace.dbg( "_PPM                : " + Gfx.PPM );
             Trace.divider();
-            Trace.dbg( "_VIRTUAL?           : " + App.appConfig.availableInputs.contains( ControllerType._JOYSTICK, true ) );
-            Trace.dbg( "_EXTERNAL?          : " + App.appConfig.availableInputs.contains( ControllerType._EXTERNAL, true ) );
-            Trace.dbg( "_KEYBOARD?          : " + App.appConfig.availableInputs.contains( ControllerType._KEYBOARD, true ) );
-            Trace.dbg( "controllerPos       : " + App.appConfig.virtualControllerPos );
-            Trace.dbg( "controllersFitted   : " + App.appConfig.controllersFitted );
-            Trace.dbg( "usedController      : " + App.appConfig.currentController );
+            Trace.dbg( "_VIRTUAL?           : " + App.getAppConfig().availableInputs.contains( ControllerType._JOYSTICK, true ) );
+            Trace.dbg( "_EXTERNAL?          : " + App.getAppConfig().availableInputs.contains( ControllerType._EXTERNAL, true ) );
+            Trace.dbg( "_KEYBOARD?          : " + App.getAppConfig().availableInputs.contains( ControllerType._KEYBOARD, true ) );
+            Trace.dbg( "controllerPos       : " + App.getAppConfig().virtualControllerPos );
+            Trace.dbg( "controllersFitted   : " + App.getAppConfig().controllersFitted );
+            Trace.dbg( "usedController      : " + App.getAppConfig().currentController );
             Trace.divider();
         }
     }

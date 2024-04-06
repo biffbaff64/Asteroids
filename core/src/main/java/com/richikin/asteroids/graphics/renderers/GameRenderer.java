@@ -1,6 +1,8 @@
 package com.richikin.asteroids.graphics.renderers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -26,6 +28,7 @@ public class GameRenderer implements Disposable
     private Zoom            hudZoom;
     private boolean         isDrawingStage;
 
+    private Texture       backgroundTexture;
     private WorldRenderer worldRenderer;
     private HudRenderer   hudRenderer;
     private Vector3       cameraPos;
@@ -42,7 +45,7 @@ public class GameRenderer implements Disposable
     {
         Trace.checkPoint();
 
-        App.appConfig.camerasReady = false;
+        App.getAppConfig().camerasReady = false;
 
         // --------------------------------------
         // Camera for displaying the starfield background.
@@ -52,6 +55,8 @@ public class GameRenderer implements Disposable
                 ViewportType._STRETCH,
                 "Tiled Cam"
             );
+
+        backgroundTexture = App.getAssets().loadSingleAsset( "space_background.png", Texture.class );
 
         // --------------------------------------
         // Camera for displaying game scene, usually just sprites.
@@ -84,12 +89,12 @@ public class GameRenderer implements Disposable
         hudGameCamera.setCameraZoom( DEFAULT_HUD_ZOOM );
 
         isDrawingStage             = false;
-        App.appConfig.camerasReady = true;
+        App.getAppConfig().camerasReady = true;
     }
 
     public void render()
     {
-        ScreenUtils.clear( 0, 0, 0, 1, true );
+        ScreenUtils.clear( Color.WHITE, true );
 
         App.getSpriteBatch().enableBlending();
 
@@ -131,6 +136,7 @@ public class GameRenderer implements Disposable
                 backgroundCamera.setPosition( cameraPos, gameZoom.getZoomValue(), true );
             }
 
+            App.getSpriteBatch().draw( backgroundTexture, 0, 0 );
             App.getSpriteBatch().end();
         }
     }

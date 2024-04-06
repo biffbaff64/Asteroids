@@ -3,9 +3,10 @@ package com.richikin.asteroids.assets;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.richikin.asteroids.enums.GraphicID;
 import com.richikin.asteroids.utils.Trace;
 
-public abstract class AssetLoader implements com.richikin.asteroids.assets.Assets
+public class AssetLoader implements com.richikin.asteroids.assets.Assets
 {
     // Texture Atlas names.
     // For more information check DesktopLauncher::main()
@@ -146,6 +147,36 @@ public abstract class AssetLoader implements com.richikin.asteroids.assets.Asset
         return assetManager.get( _ACHIEVEMENTS_ATLAS, TextureAtlas.class );
     }
 
+    @Override
+    public String getRedObjectName()
+    {
+        return null;
+    }
+
+    @Override
+    public String getBlueObjectName()
+    {
+        return null;
+    }
+
+    @Override
+    public String getGreenObjectName()
+    {
+        return null;
+    }
+
+    @Override
+    public String getYellowObjectName()
+    {
+        return null;
+    }
+
+    @Override
+    public String getWhiteObjectName()
+    {
+        return null;
+    }
+
     /**
      * Load single asset, and ensures that it is loaded.
      * It then returns an object of the specified type.
@@ -193,19 +224,61 @@ public abstract class AssetLoader implements com.richikin.asteroids.assets.Asset
     }
 
     @Override
-    public abstract String getSkinFilename();
+    public String getSkinFilename()
+    {
+        return null;
+    }
 
     @Override
-    public abstract String getDevPanelFont();
+    public String getDevPanelFont()
+    {
+        return null;
+    }
 
     @Override
-    public abstract String getDevPanelBackground();
+    public String getDevPanelBackground()
+    {
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getPausePanelBackground()
+    {
+        return null;
+    }
 
     @Override
-    public abstract String getOptionsPanelAsset();
+    public String getOptionsPanelAsset()
+    {
+        return null;
+    }
 
     @Override
-    public abstract String getControllerTestAsset();
+    public String getControllerTestAsset()
+    {
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public TextureRegion getStarfieldObject()
+    {
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public GraphicID getPlayerGID()
+    {
+        return null;
+    }
 
     @Override
     public void dispose()

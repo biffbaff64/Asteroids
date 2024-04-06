@@ -1,14 +1,16 @@
 package com.richikin.asteroids.core;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.richikin.asteroids.config.AppConfig;
+import com.richikin.asteroids.scenes.SplashScreen;
 
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
  */
 public class MainGame extends com.badlogic.gdx.Game
 {
+    private SplashScreen splashScreen;
+
     public MainGame()
     {
     }
@@ -16,21 +18,41 @@ public class MainGame extends com.badlogic.gdx.Game
     @Override
     public void create()
     {
-        App.mainGame = this;
+        App.setMainGame( this );
+
+        splashScreen = new SplashScreen();
+        splashScreen.setup( null );
 
         //
         // Initialise all essential objects required before
         // the main screen is initialised.
-        App.appConfig = new AppConfig();
-        App.appConfig.setup();
+        App.setAppConfig( new AppConfig() );
+        App.getAppConfig().setup();
     }
 
     @Override
     public void render()
     {
-        ScreenUtils.clear( 0, 0, 0, 1 );
+        if ( splashScreen.isAvailable )
+        {
+            if ( !App.getAppConfig().isStartupDone() )
+            {
+                App.getAppConfig().startApp();
+            }
 
-        super.render();
+            splashScreen.update();
+            splashScreen.render();
+
+            if ( !splashScreen.isAvailable )
+            {
+                App.getAppConfig().closeStartup();
+                splashScreen.dispose();
+            }
+        }
+        else
+        {
+            super.render();
+        }
     }
 
     /**

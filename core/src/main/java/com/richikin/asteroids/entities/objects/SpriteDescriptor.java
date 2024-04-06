@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.richikin.asteroids.enums.GraphicID;
 import com.richikin.asteroids.physics.Direction;
-import com.richikin.asteroids.utils.Trace;
 import com.richikin.asteroids.utils.Box;
+import com.richikin.asteroids.utils.Trace;
 
 /**
  * Used for storing relevant information for
@@ -14,10 +14,10 @@ import com.richikin.asteroids.utils.Box;
  */
 public class SpriteDescriptor
 {
-    public String    _NAME;
-    public GraphicID _GID;          // ID. See GraphicID class for options.
-    public String    _ASSET;        // The initial image asset.
-    public int       _FRAMES;       // Number of frames in the asset above.
+    public String             _NAME;
+    public GraphicID          _GID;          // ID. See GraphicID class for options.
+    public String             _ASSET;        // The initial image asset.
+    public int                _FRAMES;       // Number of frames in the asset above.
     public GraphicID          _TYPE;         // _MAIN, _INTERACTIVE, _PICKUP etc
     public Vector3            _POSITION;     // X, Y Pos of tile, in TileWidth units, Z-Sort value.
     public Vector2            _SIZE;         // Width and Height.
@@ -28,8 +28,8 @@ public class SpriteDescriptor
     public int                _LINK;         // Linked GDXSprite (if applicable).
     public Direction          _DIR;          // Initial direction of travel. Useful for moving blocks etc.
     public Vector2            _DIST;         // Initial travel distance. Useful for moving blocks etc.
-    public Vector2   _SPEED;        // Initial speed. Useful for moving blocks etc.
-    public Box       _BOX;          //
+    public Vector2            _SPEED;        // Initial speed. Useful for moving blocks etc.
+    public Box                _BOX;          //
 
     public SpriteDescriptor()
     {

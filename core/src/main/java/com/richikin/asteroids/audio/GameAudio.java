@@ -2,10 +2,9 @@ package com.richikin.asteroids.audio;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.richikin.asteroids.config.AppConfig;
 import com.richikin.asteroids.config.Settings;
-import com.richikin.asteroids.utils.Trace;
 import com.richikin.asteroids.core.App;
+import com.richikin.asteroids.utils.Trace;
 
 public class GameAudio
 {
@@ -36,7 +35,7 @@ public class GameAudio
     {
         if ( musicLoaded )
         {
-            if ( App.appConfig.gamePaused )
+            if ( App.getAppConfig().gamePaused )
             {
                 if ( ( AudioData.getMusic()[ currentTune ] != null )
                         && AudioData.getMusic()[ currentTune ].isPlaying() )
@@ -73,9 +72,9 @@ public class GameAudio
 //            AudioData.music[AudioData.MUS_HISCORE] = App.getAssets().loadSingleAsset("data/sounds/breath.mp3", Music.class);
 //            AudioData.music[AudioData.MUS_GAME]    = App.getAssets().loadSingleAsset("data/sounds/fear_mon.mp3", Music.class);
 
-            App.settings.getPrefs().putInteger( Settings._MUSIC_VOLUME, AudioData._DEFAULT_MUSIC_VOLUME );
-            App.settings.getPrefs().putInteger( Settings._FX_VOLUME, AudioData._DEFAULT_FX_VOLUME );
-            App.settings.getPrefs().flush();
+            App.getSettings().getPrefs().putInteger( Settings._MUSIC_VOLUME, AudioData._DEFAULT_MUSIC_VOLUME );
+            App.getSettings().getPrefs().putInteger( Settings._FX_VOLUME, AudioData._DEFAULT_FX_VOLUME );
+            App.getSettings().getPrefs().flush();
 
             soundsLoaded = AudioData.getSounds().length > 0;
             musicLoaded  = AudioData.getMusic().length > 0;
@@ -173,7 +172,7 @@ public class GameAudio
         {
             if ( getMusicVolume() > 0 )
             {
-                if ( App.settings.isEnabled( Settings._MUSIC_ENABLED )
+                if ( App.getSettings().isEnabled( Settings._MUSIC_ENABLED )
                         && ( AudioData.getMusic() != null )
                         && !AudioData.getMusic()[ musicNumber ].isPlaying() )
                 {
@@ -189,7 +188,7 @@ public class GameAudio
 
     public void startSound( int soundNumber )
     {
-        if ( App.settings.isEnabled( Settings._SOUNDS_ENABLED ) && soundsLoaded && ( soundNumber >= 0 ) )
+        if ( App.getSettings().isEnabled( Settings._SOUNDS_ENABLED ) && soundsLoaded && ( soundNumber >= 0 ) )
         {
             if ( getFXVolume() > 0 )
             {
@@ -222,24 +221,24 @@ public class GameAudio
             }
         }
 
-        App.settings.getPrefs().putInteger( Settings._MUSIC_VOLUME, volume );
-        App.settings.getPrefs().flush();
+        App.getSettings().getPrefs().putInteger( Settings._MUSIC_VOLUME, volume );
+        App.getSettings().getPrefs().flush();
     }
 
     public void setFXVolume( int volume )
     {
-        App.settings.getPrefs().putInteger( Settings._FX_VOLUME, volume );
-        App.settings.getPrefs().flush();
+        App.getSettings().getPrefs().putInteger( Settings._FX_VOLUME, volume );
+        App.getSettings().getPrefs().flush();
     }
 
     public int getMusicVolume()
     {
-        return App.settings.getPrefs().getInteger( Settings._MUSIC_VOLUME );
+        return App.getSettings().getPrefs().getInteger( Settings._MUSIC_VOLUME );
     }
 
     public int getFXVolume()
     {
-        return App.settings.getPrefs().getInteger( Settings._FX_VOLUME );
+        return App.getSettings().getPrefs().getInteger( Settings._FX_VOLUME );
     }
 
     public void saveMusicVolume()
