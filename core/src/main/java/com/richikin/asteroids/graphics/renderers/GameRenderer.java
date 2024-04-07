@@ -2,7 +2,6 @@ package com.richikin.asteroids.graphics.renderers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -28,13 +27,13 @@ public class GameRenderer implements Disposable
     private Zoom            hudZoom;
     private boolean         isDrawingStage;
 
-    private Texture       backgroundTexture;
     private WorldRenderer worldRenderer;
     private HudRenderer   hudRenderer;
     private Vector3       cameraPos;
 
     public GameRenderer()
     {
+        Trace.checkPoint();
     }
 
     /**
@@ -55,8 +54,6 @@ public class GameRenderer implements Disposable
                 ViewportType._STRETCH,
                 "Tiled Cam"
             );
-
-        backgroundTexture = App.getAssets().loadSingleAsset( "space_background.png", Texture.class );
 
         // --------------------------------------
         // Camera for displaying game scene, usually just sprites.
@@ -94,7 +91,7 @@ public class GameRenderer implements Disposable
 
     public void render()
     {
-        ScreenUtils.clear( Color.WHITE, true );
+        ScreenUtils.clear( Color.BLACK, true );
 
         App.getSpriteBatch().enableBlending();
 
@@ -123,8 +120,8 @@ public class GameRenderer implements Disposable
             App.getSpriteBatch().setProjectionMatrix( backgroundCamera.camera.combined );
             App.getSpriteBatch().begin();
 
-            cameraPos.x = 0;
-            cameraPos.y = 0;
+            cameraPos.x = ( backgroundCamera.camera.viewportWidth / 2 );
+            cameraPos.y = ( backgroundCamera.camera.viewportHeight / 2 );
             cameraPos.z = 0;
 
             if ( backgroundCamera.isLerpingEnabled )
@@ -136,7 +133,6 @@ public class GameRenderer implements Disposable
                 backgroundCamera.setPosition( cameraPos, gameZoom.getZoomValue(), true );
             }
 
-            App.getSpriteBatch().draw( backgroundTexture, 0, 0 );
             App.getSpriteBatch().end();
         }
     }
@@ -149,8 +145,8 @@ public class GameRenderer implements Disposable
             App.getSpriteBatch().setProjectionMatrix( spriteGameCamera.camera.combined );
             App.getSpriteBatch().begin();
 
-            cameraPos.x = 0;
-            cameraPos.y = 0;
+            cameraPos.x = ( spriteGameCamera.camera.viewportWidth / 2 );
+            cameraPos.y = ( spriteGameCamera.camera.viewportHeight / 2 );
             cameraPos.z = 0;
 
             spriteGameCamera.setPosition( cameraPos, gameZoom.getZoomValue(), true );

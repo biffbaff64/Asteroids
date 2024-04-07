@@ -69,7 +69,7 @@ public class Developer
     {
         if ( App.getAppConfig().isDesktopApp() )
         {
-            isDevMode = "TRUE".equalsIgnoreCase( System.getenv( "_DEV_MODE" ) );
+            isDevMode = "TRUE".equalsIgnoreCase( System.getenv( "DEV_MODE" ) );
         }
         else
         {

@@ -11,6 +11,7 @@ import com.richikin.asteroids.graphics.Gfx;
 import com.richikin.asteroids.input.ControllerPos;
 import com.richikin.asteroids.input.ControllerType;
 import com.richikin.asteroids.input.Switch;
+import com.richikin.asteroids.scenes.MainScene;
 import com.richikin.asteroids.utils.Developer;
 import com.richikin.asteroids.utils.Trace;
 
@@ -117,6 +118,14 @@ public class AppConfig
     public void closeStartup()
     {
         Developer.configReport();
+
+        // ======================================
+        // TEMP
+        App.createMainSceneObjects();
+        App.setMainScene( new MainScene() );
+        App.getMainScene().reset();
+        App.getMainGame().setScreen( App.getMainScene() );
+        // ======================================
     }
 
     public boolean isStartupDone()

@@ -11,6 +11,7 @@ import com.richikin.asteroids.config.Settings;
 import com.richikin.asteroids.entities.*;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.renderers.GameRenderer;
+import com.richikin.asteroids.scenes.HudScene;
 import com.richikin.asteroids.scenes.MainScene;
 import com.richikin.asteroids.scenes.TitleScene;
 import com.richikin.asteroids.utils.StateManager;
@@ -21,24 +22,24 @@ public class App
 
     // ------------------------------------------------------------------------
 
-    private static MainGame       mainGame;
-    private static Settings       settings;
-    private static GameRenderer   gameRenderer;
-    private static AppConfig      appConfig;
-    private static StateManager   appState;
-    private static MainScene      mainScene;
-    private static TitleScene     titleScene;
-    private static Box2DHelper    box2DHelper;
-    private static Assets         assets;
-    private static SpriteBatch    spriteBatch;
-    private static GameProgress   gameProgress;
-    private static Entities       entities;
-    private static HeadsUpDisplay hud;
-    private static EntityManager  entityManager;
-    private static EntityUtils    entityUtils;
-    private static EntityData     entityData;
-    private static Stage          stage;
-    private static MainPlayer     mainPlayer;
+    private static MainGame      mainGame;
+    private static Settings      settings;
+    private static GameRenderer  gameRenderer;
+    private static AppConfig     appConfig;
+    private static StateManager  appState;
+    private static MainScene     mainScene;
+    private static TitleScene    titleScene;
+    private static Box2DHelper   box2DHelper;
+    private static Assets        assets;
+    private static SpriteBatch   spriteBatch;
+    private static GameManager   gameManager;
+    private static Entities      entities;
+    private static HudScene      hud;
+    private static EntityManager entityManager;
+    private static EntityUtils   entityUtils;
+    private static EntityData    entityData;
+    private static Stage         stage;
+    private static MainPlayer    mainPlayer;
 
     // ------------------------------------------------------------------------
     // CODE
@@ -65,26 +66,16 @@ public class App
 
         box2DHelper  = new Box2DHelper();
         gameRenderer = new GameRenderer();
-        gameProgress = new GameProgress();
+        gameManager  = new GameManager();
     }
 
     public static void createMainSceneObjects()
     {
         entities      = new Entities();
-        hud           = new HeadsUpDisplay();
+        hud           = new HudScene();
         entityManager = new EntityManager();
         entityUtils   = new EntityUtils();
     }
-
-    public void deleteEssentialObjects()
-    {
-    }
-
-    public void deleteMainSceneObjects()
-    {
-    }
-
-    // ------------------------------------------------------------------------
 
     public static EntityData getEntityData()
     {
@@ -97,26 +88,6 @@ public class App
     }
 
     // ------------------------------------------------------------------------
-
-    // ------------------------------------------------
-    //@formatter:off
-    public static GameRenderer          getGameRenderer()           {   return gameRenderer;        }
-    public static MainGame              getMainGame()               {   return mainGame;            }
-    public static Box2DHelper           getBox2DHelper()            {   return box2DHelper;         }
-    public static TitleScene            getTitleScene()             {   return titleScene;          }
-    public static MainScene             getMainScene()              {   return mainScene;           }
-    public static GameProgress          getGameProgress()           {  return gameProgress;         }
-    public static HeadsUpDisplay        getHud()                    {  return hud;                  }
-    public static Entities              getEntities()               {  return entities;             }
-    public static EntityManager         getEntityManager()          {  return entityManager;        }
-    public static EntityUtils           getEntityUtils()            {  return entityUtils;          }
-    public static Assets                getAssets()                 {  return assets;               }
-    public static StateManager          getAppState()               {  return appState;             }
-    public static AppConfig             getAppConfig()              {  return appConfig;            }
-    public static Settings              getSettings()               {  return settings;             }
-    public static SpriteBatch           getSpriteBatch()            {  return spriteBatch;          }
-    //@formatter:on
-    // ------------------------------------------------
 
     /**
      * Sets the global access reference to MainGame, which extends
@@ -133,7 +104,30 @@ public class App
         appConfig = config;
     }
 
-    // ------------------------------------------------------------------------
+    public static void setMainScene( MainScene scene )
+    {
+        mainScene = scene;
+    }
+
+    // ------------------------------------------------
+    //@formatter:off
+    public static GameRenderer          getGameRenderer()           {   return gameRenderer;        }
+    public static MainGame              getMainGame()               {   return mainGame;            }
+    public static Box2DHelper           getBox2DHelper()            {   return box2DHelper;         }
+    public static TitleScene            getTitleScene()             {   return titleScene;          }
+    public static MainScene             getMainScene()              {   return mainScene;           }
+    public static GameManager           getGameManager()            {  return gameManager;          }
+    public static HudScene              getHud()                    {  return hud;                  }
+    public static Entities              getEntities()               {  return entities;             }
+    public static EntityManager         getEntityManager()          {  return entityManager;        }
+    public static EntityUtils           getEntityUtils()            {  return entityUtils;          }
+    public static Assets                getAssets()                 {  return assets;               }
+    public static StateManager          getAppState()               {  return appState;             }
+    public static AppConfig             getAppConfig()              {  return appConfig;            }
+    public static Settings              getSettings()               {  return settings;             }
+    public static SpriteBatch           getSpriteBatch()            {  return spriteBatch;          }
+    //@formatter:on
+    // ------------------------------------------------
 
     public static void createStage( Viewport viewport )
     {
@@ -143,5 +137,15 @@ public class App
     public static Stage getStage()
     {
         return stage;
+    }
+
+    // ------------------------------------------------------------------------
+
+    public void deleteEssentialObjects()
+    {
+    }
+
+    public void deleteMainSceneObjects()
+    {
     }
 }

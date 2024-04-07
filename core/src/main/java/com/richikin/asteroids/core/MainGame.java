@@ -1,8 +1,11 @@
 package com.richikin.asteroids.core;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.richikin.asteroids.config.AppConfig;
 import com.richikin.asteroids.scenes.SplashScreen;
+import com.richikin.asteroids.utils.Trace;
 
 /**
  * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
@@ -18,6 +21,14 @@ public class MainGame extends com.badlogic.gdx.Game
     @Override
     public void create()
     {
+        //
+        // Initialise DEBUG classes
+        //noinspection GDXJavaLogLevel
+        Gdx.app.setLogLevel( Application.LOG_DEBUG );
+        Trace.enableWriteToFile( true );
+        Trace.openDebugFile( "documents/log.txt", true );
+        Trace.checkPoint();
+
         App.setMainGame( this );
 
         splashScreen = new SplashScreen();
