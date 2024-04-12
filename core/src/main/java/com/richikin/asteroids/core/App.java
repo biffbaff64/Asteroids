@@ -9,6 +9,9 @@ import com.richikin.asteroids.assets.Assets;
 import com.richikin.asteroids.config.AppConfig;
 import com.richikin.asteroids.config.Settings;
 import com.richikin.asteroids.entities.*;
+import com.richikin.asteroids.entities.actors.MainPlayer;
+import com.richikin.asteroids.entities.utils.AnimationUtils;
+import com.richikin.asteroids.entities.utils.EntityUtils;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.renderers.GameRenderer;
 import com.richikin.asteroids.scenes.HudScene;
@@ -22,24 +25,25 @@ public class App
 
     // ------------------------------------------------------------------------
 
-    private static MainGame      mainGame;
-    private static Settings      settings;
-    private static GameRenderer  gameRenderer;
-    private static AppConfig     appConfig;
-    private static StateManager  appState;
-    private static MainScene     mainScene;
-    private static TitleScene    titleScene;
-    private static Box2DHelper   box2DHelper;
-    private static Assets        assets;
-    private static SpriteBatch   spriteBatch;
-    private static GameManager   gameManager;
-    private static Entities      entities;
-    private static HudScene      hud;
+    private static MainGame       mainGame;
+    private static Settings       settings;
+    private static GameRenderer   gameRenderer;
+    private static AppConfig      appConfig;
+    private static StateManager   appState;
+    private static MainScene      mainScene;
+    private static TitleScene     titleScene;
+    private static Box2DHelper    box2DHelper;
+    private static Assets         assets;
+    private static SpriteBatch    spriteBatch;
+    private static GameManager    gameManager;
+    private static Entities       entities;
+    private static HudScene       hud;
     private static EntityManager entityManager;
     private static EntityUtils   entityUtils;
     private static EntityData    entityData;
-    private static Stage         stage;
-    private static MainPlayer    mainPlayer;
+    private static AnimationUtils animationUtils;
+    private static Stage      stage;
+    private static MainPlayer mainPlayer;
 
     // ------------------------------------------------------------------------
     // CODE
@@ -71,10 +75,11 @@ public class App
 
     public static void createMainSceneObjects()
     {
-        entities      = new Entities();
-        hud           = new HudScene();
-        entityManager = new EntityManager();
-        entityUtils   = new EntityUtils();
+        entities       = new Entities();
+        hud            = new HudScene();
+        entityManager  = new EntityManager();
+        entityUtils    = new EntityUtils();
+        animationUtils = new AnimationUtils();
     }
 
     public static EntityData getEntityData()
@@ -126,6 +131,7 @@ public class App
     public static AppConfig             getAppConfig()              {  return appConfig;            }
     public static Settings              getSettings()               {  return settings;             }
     public static SpriteBatch           getSpriteBatch()            {  return spriteBatch;          }
+    public static AnimationUtils        getAnimationUtils()         {  return animationUtils;       }
     //@formatter:on
     // ------------------------------------------------
 

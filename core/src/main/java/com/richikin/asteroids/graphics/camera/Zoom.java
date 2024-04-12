@@ -18,14 +18,14 @@ public class Zoom
         this.resetValue = _INITIAL_ZOOM;
         this.target     = _DEFAULT_ZOOM;
         this.bounce     = false;
-        this.direction  = Movement._DIRECTION_STILL;
+        this.direction  = Movement.DIRECTION_STILL;
     }
 
     public boolean update( float zoom )
     {
         boolean done = false;
 
-        if ( direction == Movement._DIRECTION_UP )
+        if ( direction == Movement.DIRECTION_UP )
         {
             if ( zoomValue < target )
             {
@@ -35,17 +35,17 @@ public class Zoom
             {
                 if ( bounce )
                 {
-                    direction = Movement._DIRECTION_DOWN;
+                    direction = Movement.DIRECTION_DOWN;
                 }
                 else
                 {
-                    direction = Movement._DIRECTION_STILL;
+                    direction = Movement.DIRECTION_STILL;
                 }
 
                 done = true;
             }
         }
-        else if ( direction == Movement._DIRECTION_DOWN )
+        else if ( direction == Movement.DIRECTION_DOWN )
         {
             if ( zoomValue > target )
             {
@@ -55,11 +55,11 @@ public class Zoom
             {
                 if ( bounce )
                 {
-                    direction = Movement._DIRECTION_UP;
+                    direction = Movement.DIRECTION_UP;
                 }
                 else
                 {
-                    direction = Movement._DIRECTION_STILL;
+                    direction = Movement.DIRECTION_STILL;
                 }
 
                 done = true;

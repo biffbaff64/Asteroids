@@ -32,23 +32,23 @@ public class Direction extends Vector2
      */
     public void standStill()
     {
-        this.x = Movement._DIRECTION_STILL;
-        this.y = Movement._DIRECTION_STILL;
+        this.x = Movement.DIRECTION_STILL;
+        this.y = Movement.DIRECTION_STILL;
     }
 
     public boolean hasDirection()
     {
-        return ( this.x != Movement._DIRECTION_STILL ) || ( this.y != Movement._DIRECTION_STILL );
+        return ( this.x != Movement.DIRECTION_STILL ) || ( this.y != Movement.DIRECTION_STILL );
     }
 
     public boolean hasXDirection()
     {
-        return ( this.x != Movement._DIRECTION_STILL );
+        return ( this.x != Movement.DIRECTION_STILL );
     }
 
     public boolean hasYDirection()
     {
-        return ( this.y != Movement._DIRECTION_STILL );
+        return ( this.y != Movement.DIRECTION_STILL );
     }
 
     /**
@@ -76,12 +76,12 @@ public class Direction extends Vector2
      */
     public void toggle()
     {
-        if ( this.x != Movement._DIRECTION_STILL )
+        if ( this.x != Movement.DIRECTION_STILL )
         {
             toggleX();
         }
 
-        if ( this.y != Movement._DIRECTION_STILL )
+        if ( this.y != Movement.DIRECTION_STILL )
         {
             toggleY();
         }

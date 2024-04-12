@@ -12,7 +12,7 @@ public enum GraphicID
 
     // ----------------------------
     // Weapons
-    G_PLAYER_BULLET,
+    G_PLAYER_WEAPON,
 
     // ----------------------------
     // Interactive items

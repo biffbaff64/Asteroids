@@ -4,9 +4,9 @@ import com.richikin.asteroids.physics.Movement;
 
 public enum ControllerPos
 {
-    _LEFT( "LEFT", Movement._DIRECTION_LEFT ),
-    _RIGHT( "RIGHT", Movement._DIRECTION_RIGHT ),
-    _HIDDEN( "HIDDEN", Movement._DIRECTION_STILL );
+    _LEFT( "LEFT", Movement.DIRECTION_LEFT ),
+    _RIGHT( "RIGHT", Movement.DIRECTION_RIGHT ),
+    _HIDDEN( "HIDDEN", Movement.DIRECTION_STILL );
 
     final int    value;
     final String text;

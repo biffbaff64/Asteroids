@@ -11,23 +11,23 @@ public class Gfx
     // and EntityB.collidesWith has the bit set for CAT_PLAYER, then
     // EntityA and EntityB will register collisions.
     //
-    public static final short CAT_NOTHING      = 0x0000;   // - 00 (0     )
-    public static final short CAT_PLAYER       = 0x0001;   // - 01 (1     )
-    public static final short CAT_MOBILE_ENEMY = 0x0002;   // - 02 (2     )
-    public static final short UNDEFINED_03     = 0x0004;   // - 03 (4     )
-    public static final short UNDEFINED_04     = 0x0008;   // - 04 (8     )
-    public static final short UNDEFINED_05     = 0x0010;   // - 05 (16    )
-    public static final short UNDEFINED_06     = 0x0020;   // - 06 (32    )
-    public static final short UNDEFINED_07     = 0x0040;   // - 07 (64    )
-    public static final short UNDEFINED_08     = 0x0080;   // - 08 (128   )
-    public static final short UNDEFINED_09     = 0x0100;   // - 09 (256   )    // Usable by the player character
-    public static final short UNDEFINED_10     = 0x0200;   // - 10 (512   )
-    public static final short UNDEFINED_11     = 0x0400;   // - 11 (1024  )
-    public static final short UNDEFINED_12     = 0x0800;   // - 12 (2048  )
-    public static final short UNDEFINED_13     = 0x1000;   // - 13 (4096  )
-    public static final short UNDEFINED_14     = 0x2000;   // - 14 (8192  )
-    public static final short UNDEFINED_15     = 0x4000;   // - 15 (16384 )
-    public static final short CAT_ALL          = 0x7fff;   // - 16 (32767 )
+    public static final short CAT_NOTHING       = 0x0000;   // - 00 (0     )
+    public static final short CAT_PLAYER        = 0x0001;   // - 01 (1     )
+    public static final short CAT_MOBILE_ENEMY  = 0x0002;   // - 02 (2     )
+    public static final short CAT_PLAYER_WEAPON = 0x0004;   // - 03 (4     )
+    public static final short CAT_WEAPON        = 0x0008;   // - 04 (8     )
+    public static final short CAT_COLLECTIBLE   = 0x0010;   // - 05 (16    )
+    public static final short UNDEFINED_06      = 0x0020;   // - 06 (32    )
+    public static final short UNDEFINED_07      = 0x0040;   // - 07 (64    )
+    public static final short UNDEFINED_08      = 0x0080;   // - 08 (128   )
+    public static final short UNDEFINED_09      = 0x0100;   // - 09 (256   )
+    public static final short UNDEFINED_10      = 0x0200;   // - 10 (512   )
+    public static final short UNDEFINED_11      = 0x0400;   // - 11 (1024  )
+    public static final short UNDEFINED_12      = 0x0800;   // - 12 (2048  )
+    public static final short UNDEFINED_13      = 0x1000;   // - 13 (4096  )
+    public static final short UNDEFINED_14      = 0x2000;   // - 14 (8192  )
+    public static final short UNDEFINED_15      = 0x4000;   // - 15 (16384 )
+    public static final short CAT_ALL           = 0x7fff;   // - 16 (32767 )
 
     // ------------------------------------------------------------------------
 
