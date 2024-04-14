@@ -95,21 +95,21 @@ public class MainGame extends com.badlogic.gdx.Game
     }
 
     /**
-     * @param screen
-     */
-    @Override
-    public void setScreen( Screen screen )
-    {
-        super.setScreen( screen );
-    }
-
-    /**
      * @return
      */
     @Override
     public Screen getScreen()
     {
         return super.getScreen();
+    }
+
+    /**
+     * @param screen
+     */
+    @Override
+    public void setScreen( Screen screen )
+    {
+        super.setScreen( screen );
     }
 
     @Override

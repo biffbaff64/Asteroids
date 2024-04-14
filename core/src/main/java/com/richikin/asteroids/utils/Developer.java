@@ -29,11 +29,11 @@ public class Developer
                     Settings._USING_ASHLEY_ECS,
                     Settings._CULL_SPRITES,
                     Settings._BUTTON_BOXES,
-                    Settings._DISABLE_PLAYER,
                     Settings._SHADER_PROGRAM,
                     Settings._TILE_BOXES,
                     Settings._SPRITE_BOXES,
                     Settings._LEVEL_SELECT,
+                    Settings._INTRO_PANEL,
                     Settings._MENU_SCENE,
                     Settings._SCROLL_DEMO,
                     Settings._SHOW_DEBUG,
@@ -184,10 +184,10 @@ public class Developer
             Trace.dbg( "isDevMode()         : " + isDevMode() );
             Trace.dbg( "isGodMode()         : " + isGodMode() );
             Trace.divider();
-            Trace.dbg( "DESKTOP_WIDTH      : " + Gfx.DESKTOP_WIDTH );
-            Trace.dbg( "DESKTOP_HEIGHT     : " + Gfx.DESKTOP_HEIGHT );
-            Trace.dbg( "VIEW_WIDTH         : " + Gfx.VIEW_WIDTH );
-            Trace.dbg( "VIEW_HEIGHT        : " + Gfx.VIEW_HEIGHT );
+            Trace.dbg( "DESKTOP_WIDTH      : " + Gfx.DESKTOP_WINDOW_WIDTH );
+            Trace.dbg( "DESKTOP_HEIGHT     : " + Gfx.DESKTOP_WINDOW_HEIGHT );
+            Trace.dbg( "VIEW_WIDTH         : " + Gfx.GAME_VIEW_WIDTH );
+            Trace.dbg( "VIEW_HEIGHT        : " + Gfx.GAME_VIEW_HEIGHT );
             Trace.dbg( "HUD_WIDTH          : " + Gfx.HUD_WIDTH );
             Trace.dbg( "HUD_HEIGHT         : " + Gfx.HUD_HEIGHT );
             Trace.dbg( "GAME_SCENE_WIDTH   : " + Gfx.GAME_SCENE_WIDTH );

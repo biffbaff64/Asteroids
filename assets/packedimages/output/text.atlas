@@ -1,0 +1,27 @@
+
+text.png
+size: 2048, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+gameover
+  rotate: false
+  xy: 2, 2
+  size: 520, 348
+  orig: 520, 348
+  offset: 0, 0
+  index: -1
+getready
+  rotate: false
+  xy: 1028, 295
+  size: 650, 145
+  orig: 650, 145
+  offset: 0, 0
+  index: -1
+paused
+  rotate: false
+  xy: 2, 352
+  size: 1024, 88
+  orig: 1024, 88
+  offset: 0, 0
+  index: -1

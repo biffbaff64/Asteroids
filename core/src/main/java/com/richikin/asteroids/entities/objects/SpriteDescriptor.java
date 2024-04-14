@@ -1,16 +1,16 @@
 package com.richikin.asteroids.entities.objects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.richikin.asteroids.enums.GraphicID;
 import com.richikin.asteroids.physics.Direction;
 import com.richikin.asteroids.utils.Box;
 import com.richikin.asteroids.utils.Trace;
+import com.richikin.asteroids.utils.Vec2;
+import com.richikin.asteroids.utils.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Used for storing relevant information for
- * creating, placing and initialising sprites.
+ * Used for storing relevant information for creating, placing and initialising sprites.
  */
 public class SpriteDescriptor
 {
@@ -19,16 +19,16 @@ public class SpriteDescriptor
     public String             _ASSET;        // The initial image asset.
     public int                _FRAMES;       // Number of frames in the asset above.
     public GraphicID          _TYPE;         // _MAIN, _INTERACTIVE, _PICKUP etc
-    public Vector3            _POSITION;     // X, Y Pos of tile, in TileWidth units, Z-Sort value.
-    public Vector2            _SIZE;         // Width and Height.
+    public Vec3               _POSITION;     // X, Y Pos of tile, in TileWidth units, Z-Sort value.
+    public Vec2               _SIZE;         // Width and Height.
     public int                _INDEX;        // This entity's position in the entity map.
     public Animation.PlayMode _PLAYMODE;     // Animation playmode for the asset frames above.
     public float              _ANIM_RATE;    // Animation speed
     public GdxSprite          _PARENT;       // Parent GDXSprite (if applicable).
     public int                _LINK;         // Linked GDXSprite (if applicable).
     public Direction          _DIR;          // Initial direction of travel. Useful for moving blocks etc.
-    public Vector2            _DIST;         // Initial travel distance. Useful for moving blocks etc.
-    public Vector2            _SPEED;        // Initial speed. Useful for moving blocks etc.
+    public Vec2               _DIST;         // Initial travel distance. Useful for moving blocks etc.
+    public Vec2               _SPEED;        // Initial speed. Useful for moving blocks etc.
     public Box                _BOX;          //
 
     public SpriteDescriptor()
@@ -36,8 +36,8 @@ public class SpriteDescriptor
         this._NAME      = "";
         this._GID       = GraphicID.G_NO_ID;
         this._TYPE      = GraphicID.G_NO_ID;
-        this._POSITION  = new Vector3();
-        this._SIZE      = new Vector2();
+        this._POSITION  = new Vec3();
+        this._SIZE      = new Vec2();
         this._INDEX     = 0;
         this._FRAMES    = 0;
         this._PLAYMODE  = Animation.PlayMode.NORMAL;
@@ -69,7 +69,7 @@ public class SpriteDescriptor
                              GraphicID type,
                              String asset,
                              int frames,
-                             Vector2 assetSize )
+                             Vec2 assetSize )
     {
         this( graphicID, type, asset, frames );
         this._NAME     = name;
@@ -82,7 +82,7 @@ public class SpriteDescriptor
                              GraphicID type,
                              String asset,
                              int frames,
-                             Vector2 assetSize,
+                             Vec2 assetSize,
                              Animation.PlayMode playMode )
     {
         this( name, graphicID, type, asset, frames, assetSize );
@@ -95,7 +95,7 @@ public class SpriteDescriptor
                              GraphicID type,
                              String asset,
                              int frames,
-                             Vector2 assetSize,
+                             Vec2 assetSize,
                              Animation.PlayMode playMode,
                              float animRate )
     {
@@ -108,7 +108,7 @@ public class SpriteDescriptor
         set( descriptor );
     }
 
-    public void set( SpriteDescriptor descriptor )
+    public void set( @NotNull SpriteDescriptor descriptor )
     {
         this._NAME      = descriptor._NAME;
         this._GID       = descriptor._GID;
@@ -119,12 +119,12 @@ public class SpriteDescriptor
         this._ANIM_RATE = descriptor._ANIM_RATE;
         this._LINK      = descriptor._LINK;
         this._ASSET     = descriptor._ASSET;
-        this._POSITION  = new Vector3( descriptor._POSITION );
-        this._SIZE      = new Vector2( descriptor._SIZE );
+        this._POSITION  = new Vec3( descriptor._POSITION );
+        this._SIZE      = new Vec2( descriptor._SIZE );
         this._PARENT    = new GdxSprite();
         this._DIR       = new Direction();
-        this._DIST      = new Vector2();
-        this._SPEED     = new Vector2();
+        this._DIST      = new Vec2();
+        this._SPEED     = new Vec2();
         this._BOX       = ( descriptor._BOX == null ) ? new Box() : new Box( descriptor._BOX );
     }
 

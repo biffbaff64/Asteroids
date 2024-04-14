@@ -71,7 +71,7 @@ public class AppConfig
 
         if ( isDesktopApp() )
         {
-            Gdx.graphics.setWindowedMode( Gfx.DESKTOP_WIDTH, Gfx.DESKTOP_HEIGHT );
+            Gdx.graphics.setWindowedMode( Gfx.DESKTOP_WINDOW_WIDTH, Gfx.DESKTOP_WINDOW_HEIGHT );
         }
 
         virtualControllerPos = ControllerPos._HIDDEN;

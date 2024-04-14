@@ -8,7 +8,9 @@ import com.richikin.asteroids.assets.AssetLoader;
 import com.richikin.asteroids.assets.Assets;
 import com.richikin.asteroids.config.AppConfig;
 import com.richikin.asteroids.config.Settings;
-import com.richikin.asteroids.entities.*;
+import com.richikin.asteroids.entities.Entities;
+import com.richikin.asteroids.entities.EntityData;
+import com.richikin.asteroids.entities.EntityManager;
 import com.richikin.asteroids.entities.actors.MainPlayer;
 import com.richikin.asteroids.entities.utils.AnimationUtils;
 import com.richikin.asteroids.entities.utils.EntityUtils;
@@ -17,6 +19,7 @@ import com.richikin.asteroids.graphics.renderers.GameRenderer;
 import com.richikin.asteroids.scenes.HudScene;
 import com.richikin.asteroids.scenes.MainScene;
 import com.richikin.asteroids.scenes.TitleScene;
+import com.richikin.asteroids.utils.PanelManager;
 import com.richikin.asteroids.utils.StateManager;
 
 public class App
@@ -38,12 +41,13 @@ public class App
     private static GameManager    gameManager;
     private static Entities       entities;
     private static HudScene       hud;
-    private static EntityManager entityManager;
-    private static EntityUtils   entityUtils;
-    private static EntityData    entityData;
+    private static EntityManager  entityManager;
+    private static EntityUtils    entityUtils;
+    private static EntityData     entityData;
     private static AnimationUtils animationUtils;
-    private static Stage      stage;
-    private static MainPlayer mainPlayer;
+    private static Stage          stage;
+    private static MainPlayer     mainPlayer;
+    private static PanelManager   panelManager;
 
     // ------------------------------------------------------------------------
     // CODE
@@ -75,6 +79,7 @@ public class App
 
     public static void createMainSceneObjects()
     {
+        panelManager   = new PanelManager();
         entities       = new Entities();
         hud            = new HudScene();
         entityManager  = new EntityManager();
@@ -90,6 +95,11 @@ public class App
     public static MainPlayer getPlayer()
     {
         return mainPlayer;
+    }
+
+    public static void setPlayer( MainPlayer player )
+    {
+        mainPlayer = player;
     }
 
     // ------------------------------------------------------------------------
@@ -116,11 +126,11 @@ public class App
 
     // ------------------------------------------------
     //@formatter:off
-    public static GameRenderer          getGameRenderer()           {   return gameRenderer;        }
-    public static MainGame              getMainGame()               {   return mainGame;            }
-    public static Box2DHelper           getBox2DHelper()            {   return box2DHelper;         }
-    public static TitleScene            getTitleScene()             {   return titleScene;          }
-    public static MainScene             getMainScene()              {   return mainScene;           }
+    public static GameRenderer          getGameRenderer()           {  return gameRenderer;         }
+    public static MainGame              getMainGame()               {  return mainGame;             }
+    public static Box2DHelper           getBox2DHelper()            {  return box2DHelper;          }
+    public static TitleScene            getTitleScene()             {  return titleScene;           }
+    public static MainScene             getMainScene()              {  return mainScene;            }
     public static GameManager           getGameManager()            {  return gameManager;          }
     public static HudScene              getHud()                    {  return hud;                  }
     public static Entities              getEntities()               {  return entities;             }
@@ -132,6 +142,7 @@ public class App
     public static Settings              getSettings()               {  return settings;             }
     public static SpriteBatch           getSpriteBatch()            {  return spriteBatch;          }
     public static AnimationUtils        getAnimationUtils()         {  return animationUtils;       }
+    public static PanelManager          getPanelManager()           {  return panelManager;         }
     //@formatter:on
     // ------------------------------------------------
 

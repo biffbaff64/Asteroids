@@ -15,13 +15,13 @@ import com.richikin.asteroids.utils.Trace;
 
 public class Box2DHelper implements Disposable
 {
+    public final Array< PhysicsBody > bodiesList;
     public       World                box2DWorld;
     public       Box2DDebugRenderer   b2dr;
     public       Box2DContactListener box2DContactListener;
     public       BodyBuilder          bodyBuilder;
     public       boolean              worldStepEnabled;
     public       boolean              canDrawDebug;
-    public final Array< PhysicsBody > bodiesList;
 
     public Box2DHelper()
     {

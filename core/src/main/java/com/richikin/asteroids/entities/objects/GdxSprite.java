@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.richikin.asteroids.core.App;
 import com.richikin.asteroids.core.GameConstants;
+import com.richikin.asteroids.entities.EntityComponent;
 import com.richikin.asteroids.enums.ActionStates;
 import com.richikin.asteroids.enums.GraphicID;
 import com.richikin.asteroids.graphics.Gfx;
@@ -21,7 +23,7 @@ import com.richikin.asteroids.utils.Trace;
 
 import java.util.Arrays;
 
-public class GdxSprite implements Disposable
+public class GdxSprite implements Disposable, EntityComponent
 {
     // -----------------------------------------------
     // Identity etc.
@@ -101,10 +103,8 @@ public class GdxSprite implements Disposable
     }
 
     /**
-     * Initialise this Sprite.
-     * Override in any entity classes and add any
-     * other relevant initialisation code AFTER the
-     * call to create().
+     * Initialise this Sprite. Override in any entity classes and add any
+     * other relevant initialisation code AFTER the call to create().
      *
      * @param descriptor The {@link SpriteDescriptor} holding all setup information.
      */
@@ -270,7 +270,8 @@ public class GdxSprite implements Disposable
     {
     }
 
-    public void tidy()
+    @Override
+    public void tidy( int index )
     {
     }
 
@@ -441,6 +442,12 @@ public class GdxSprite implements Disposable
     public PhysicsBody getPhysicsBody()
     {
         return App.getBox2DHelper().bodiesList.get( b2dBodyIndex );
+    }
+
+    @Override
+    public Rectangle getBodyBox()
+    {
+        return App.getBox2DHelper().bodiesList.get( b2dBodyIndex ).bodyBox;
     }
 
     /**

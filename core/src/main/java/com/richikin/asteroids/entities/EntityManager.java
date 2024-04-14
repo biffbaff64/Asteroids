@@ -46,22 +46,15 @@ public class EntityManager implements Disposable
 
         App.getAppConfig().entitiesExist = false;
 
-        // For development purposes:-
-        // The main player character can be disabled by moving the
-        // preference setting '_DISABLE_PLAYER' from the 'disable' list
-        // into the 'enable' list in AppConfig#setTempDeveloperSettings().
-        if ( !Developer.isDevMode() || App.getSettings().isDisabled( Settings._DISABLE_PLAYER ) )
+        if ( App.getPlayer() == null )
         {
-            if ( App.getPlayer() == null )
-            {
-                // Main player needs creating
-                playerManager = new PlayerManager();
-                playerManager.init();
-            }
-            else
-            {
-                App.getPlayer().restartPlayer();
-            }
+            // Main player needs creating
+            playerManager = new PlayerManager();
+            playerManager.init();
+        }
+        else
+        {
+            App.getPlayer().restartPlayer();
         }
 
         // Initialise all other entities such as bricks, bonuses, balls etc.
@@ -98,7 +91,6 @@ public class EntityManager implements Disposable
     {
         if ( isEntityUpdateAllowed() && !App.getAppConfig().gamePaused )
         {
-            //
             // Update all non-player entities.
             for ( int i = 0; i < App.getEntityData().getEntityMap().size; i++ )
             {
@@ -157,7 +149,6 @@ public class EntityManager implements Disposable
                         entity.postUpdate();
                     }
 
-                    //
                     // NB: entity might have died in postUpdate, which is
                     // why this next if() is not an 'else'.
                     if ( ( entity.getActionState() == ActionStates._DEAD )
@@ -176,7 +167,7 @@ public class EntityManager implements Disposable
                             case G_EXPLOSION128:
                             case G_EXPLOSION256:
                             {
-                                entity.tidy();
+                                entity.tidy( i );
                             }
                             break;
 
@@ -185,7 +176,7 @@ public class EntityManager implements Disposable
                                 entity.getPhysicsBody().isAlive = false;
                                 App.getBox2DHelper().bodiesList.add( entity.getPhysicsBody() );
                                 App.getEntityData().removeEntityAt( i );
-                                entity.tidy();
+                                entity.tidy( i );
                             }
                             break;
                         }
@@ -261,6 +252,11 @@ public class EntityManager implements Disposable
      */
     public void updateEntityMapIndexes()
     {
+        if ( !App.getAppConfig().entitiesExist )
+        {
+            Trace.checkPoint();
+        }
+
         playerIndex = 0;
 
         for ( int i = 0; i < App.getEntityData().getEntityMap().size; i++ )
@@ -286,6 +282,8 @@ public class EntityManager implements Disposable
      */
     public void connectLinkedEntities()
     {
+        Trace.checkPoint();
+
         Array.ArrayIterator< EntityComponent > iter = new Array.ArrayIterator<>( App.getEntityData().getEntityMap() );
 
         while ( iter.hasNext() )

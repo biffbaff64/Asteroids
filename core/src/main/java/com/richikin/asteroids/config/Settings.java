@@ -35,10 +35,9 @@ public class Settings implements Disposable
     public static final String _MENU_HEAPS      = "menu heaps";         // Show Heap Sizes on Menu Page if true
     public static final String _MENU_SCENE      = "menu scene";         //
     public static final String _LEVEL_SELECT    = "level select";       //
+    public static final String _INTRO_PANEL     = "intro panel";        //
     public static final String _CULL_SPRITES    = "cull sprites";       // Enables Sprite Culling when off screen
     public static final String _GL_PROFILER     = "gl profiler";        // Enables/Disables the LibGdx OpenGL Profiler
-    public static final String _DISABLE_ENEMIES = "disable enemies";    //
-    public static final String _DISABLE_PLAYER  = "disable player";     //
     public static final String _AUTOPLAY        = "autoplay";           //
 
     //
@@ -66,14 +65,17 @@ public class Settings implements Disposable
 
     public Preferences prefs;
 
+    private static final String PREFS_FILE_NAME = "com.richikin.platformania.preferences";
+
     public Settings()
     {
+        Trace.checkPoint();
+
+        createPreferencesObject( PREFS_FILE_NAME );
     }
 
     public void createPreferencesObject( String prefsName )
     {
-        Trace.checkPoint();
-
         try
         {
             prefs = Gdx.app.getPreferences( prefsName );
@@ -158,6 +160,7 @@ public class Settings implements Disposable
             // ---------- Development Flags ----------
             prefs.putBoolean( _MENU_SCENE, _PREF_TRUE_DEFAULT );
             prefs.putBoolean( _LEVEL_SELECT, _PREF_TRUE_DEFAULT );
+            prefs.putBoolean( _INTRO_PANEL, _PREF_TRUE_DEFAULT );
             prefs.putBoolean( _SCROLL_DEMO, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _SPRITE_BOXES, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _TILE_BOXES, _PREF_FALSE_DEFAULT );
@@ -170,8 +173,6 @@ public class Settings implements Disposable
             prefs.putBoolean( _GL_PROFILER, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _ANDROID_ON_DESKTOP, _PREF_FALSE_DEFAULT );
             prefs.putBoolean( _AUTOPLAY, _PREF_FALSE_DEFAULT );
-            prefs.putBoolean( _DISABLE_ENEMIES, _PREF_TRUE_DEFAULT );
-            prefs.putBoolean( _DISABLE_PLAYER, _PREF_TRUE_DEFAULT );
 
             // ---------- Configuration ----------
             prefs.putBoolean( _SHADER_PROGRAM, _PREF_FALSE_DEFAULT );

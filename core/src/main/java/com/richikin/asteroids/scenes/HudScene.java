@@ -1,10 +1,9 @@
 package com.richikin.asteroids.scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 import com.richikin.asteroids.core.App;
 import com.richikin.asteroids.core.GameConstants;
@@ -28,8 +27,8 @@ public class HudScene implements Disposable
     public static final int _ROTATE_RIGHT = 1;
     public static final int _THRUST       = 2;
     public static final int _SHOOT        = 3;
-    public static final int _LIVES        = 4;
-    public static final int _HEALTH       = 5;
+    public static final int _SCORE        = 4;
+    public static final int _LIVES        = 5;
     public static final int _LEVEL        = 6;
 
     private static final int _X      = 0;
@@ -47,8 +46,8 @@ public class HudScene implements Disposable
 
             // ----------------------------------------
             // Y is distance from the TOP of the screen
-            {  932,  103,   40,    0 },             // Lives
-            {  933,   53,    0,    0 },             // Health bar
+            {   42,   20,    0,    0 },             // Score
+            { 1102,   50,   21,   31 },             // Lives
             { 1200,   64,    0,    0 },             // Level
         };
     //@formatter:on
@@ -61,11 +60,10 @@ public class HudScene implements Disposable
     public Switch  buttonThrust;
     public Switch  buttonShoot;
 
-    private Image[]     smallMan;
-    private BitmapFont  smallFont;
-    private BitmapFont  midFont;
-    private BitmapFont  bigFont;
-    private ProgressBar healthBar;
+    private Image[]    smallMan;
+    private BitmapFont smallFont;
+    private BitmapFont midFont;
+    private BitmapFont bigFont;
 
     // ----------------------------------------------------------------
     // Code
@@ -90,13 +88,13 @@ public class HudScene implements Disposable
         {
             smallMan[ i ] = scene2DUtils.createImage
                 (
-                    GameAssets.SMALL_MAN,
+                    GameAssets.SMALL_SHIP,
                     App.getAssets().getObjectsLoader()
                 );
 
             smallMan[ i ].setPosition
                 (
-                    ( displayPos[ _LIVES ][ _X ] + ( i * displayPos[ _LIVES ][ _WIDTH ] ) ),
+                    ( displayPos[ _LIVES ][ _X ] + ( i * (displayPos[ _LIVES ][ _WIDTH ] + 10) ) ),
                     ( Gfx.HUD_HEIGHT - displayPos[ _LIVES ][ _Y ] )
                 );
 
@@ -104,14 +102,6 @@ public class HudScene implements Disposable
 
             App.getStage().addActor( smallMan[ i ] );
         }
-
-        healthBar = new ProgressBar( 0, GameConstants.MAX_PROGRESSBAR_LENGTH, 1, false, new Skin() );
-        healthBar.setPosition
-            (
-                ( int ) hudOriginX + displayPos[ _HEALTH ][ _X ],
-                ( int ) hudOriginY + ( Gfx.HUD_HEIGHT - displayPos[ _HEALTH ][ _Y ] )
-            );
-//        healthBar.setHeightColorScale( 19f, Color.GREEN, 2.0f );
 
         createHUDButtons();
 
@@ -137,8 +127,8 @@ public class HudScene implements Disposable
 
             case _STATE_PANEL_UPDATE:
             {
+                updateScoreDisplay();
                 updateLivesDisplay();
-                updateBarColours();
                 checkButtons();
             }
             break;
@@ -149,6 +139,10 @@ public class HudScene implements Disposable
             }
             break;
         }
+    }
+
+    private void updateScoreDisplay()
+    {
     }
 
     /**
@@ -163,15 +157,6 @@ public class HudScene implements Disposable
                 smallMan[ i ].setVisible( i < App.getGameManager().lives.getTotal() );
             }
         }
-    }
-
-    /**
-     * Update the progress bars visually.
-     * Depending on the length of the bar they will be
-     * drawn green, orange, or red.
-     */
-    private void updateBarColours()
-    {
     }
 
     private void checkButtons()
@@ -194,14 +179,13 @@ public class HudScene implements Disposable
     {
         // The player starts each level with full strength, there's
         // no sense in starting a new level with 1% strength!
-//        App.getPlayer().strength = GameConstants.MAX_STRENGTH;
-//        healthBar.refill();
+        App.getPlayer().strength = GameConstants.MAX_STRENGTH;
     }
 
-    //@formatter:off
-    public ProgressBar  getHealthBar()                  { return healthBar;         }
-    public void         setStateID(StateID state)       { hudStateID = state;       }
-    //@formatter:on
+    public void setStateID( StateID state )
+    {
+        hudStateID = state;
+    }
 
     private void drawPanels()
     {
@@ -209,6 +193,11 @@ public class HudScene implements Disposable
 
     private void drawItems()
     {
+        midFont.setColor( Color.WHITE );
+        midFont.draw( App.getSpriteBatch(),
+            "SCORE: ",
+            displayPos[ _SCORE ][ _X ],
+            Gfx.HUD_HEIGHT - displayPos[ _SCORE ][ _Y ] );
     }
 
     /**
@@ -227,7 +216,6 @@ public class HudScene implements Disposable
      * Show or Hide the onscreen pause button.
      * Only valid for ControllerType._VIRTUAL mode.
      */
-    @SuppressWarnings( "StatementWithEmptyBody" )
     public void showPauseButton( boolean visibility )
     {
         if ( App.getAppConfig().isUsingOnScreenControls() )
@@ -281,7 +269,7 @@ public class HudScene implements Disposable
             smallMan[ i ] = null;
         }
 
-        smallMan  = null;
+        smallMan = null;
 
         smallFont = null;
         midFont   = null;

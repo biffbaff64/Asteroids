@@ -1,16 +1,32 @@
 package com.richikin.asteroids.scenes;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.richikin.asteroids.config.Settings;
 import com.richikin.asteroids.core.App;
+import com.richikin.asteroids.core.MainGameHandler;
 import com.richikin.asteroids.enums.CamID;
 import com.richikin.asteroids.enums.ScreenID;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.camera.OrthoGameCamera;
+import com.richikin.asteroids.graphics.camera.Shake;
+import com.richikin.asteroids.input.ControllerType;
+import com.richikin.asteroids.utils.Developer;
+import com.richikin.asteroids.utils.StopWatch;
 import com.richikin.asteroids.utils.Trace;
 
 public class MainScene extends AbstractBaseScene
 {
-    public boolean firstTime;
+    /*
+     * boolean firstTime - TRUE if MainScene has just been entered, i.e. a NEW Game.
+     *
+     * Setting this to true allows 'initialise()' to be called from show(), one time
+     * only. If false, then initialise() will be bypassed but the rest of show()
+     * will be processed.
+     */
+    public boolean   firstTime;
+    public StopWatch retryDelay;
+
+    private MainGameHandler mainGameHandler;
 
     public MainScene()
     {
@@ -22,6 +38,34 @@ public class MainScene extends AbstractBaseScene
     @Override
     public void initialise()
     {
+        if ( firstTime )
+        {
+            Trace.divider( '#' );
+            Trace.dbg( "NEW GAME:" );
+            Trace.dbg( "_DEVMODE: ", Developer.isDevMode() );
+            Trace.dbg( "_GODMODE: ", Developer.isGodMode() );
+            Trace.divider( '#' );
+
+//            gameCompletedPanel = new GameCompletedPanel();
+            mainGameHandler    = new MainGameHandler();
+
+            App.getGameManager().prepareNewGame();
+
+            App.getAppState().set( StateID._STATE_SETUP );
+
+//            collisionListener = new Box2DWorldContactListener();
+//
+//            App.getWorldModel().box2DContactListener.addListener( collisionListener );
+//
+//            App.getBaseRenderer().getHudGameCamera().setCameraZoom( 0.6f );
+        }
+
+        if ( App.getAppConfig().availableInputs.contains( ControllerType._JOYSTICK, true ) )
+        {
+//            App.getInputManager().getVirtualJoystick().show();
+        }
+
+        Shake.setAllowed( App.getSettings().isEnabled( Settings._VIBRATIONS ) );
     }
 
     @Override
@@ -56,6 +100,7 @@ public class MainScene extends AbstractBaseScene
             case _STATE_GAME_FINISHED:
             case _STATE_END_GAME:
             {
+                mainGameHandler.update();
             }
             break;
 

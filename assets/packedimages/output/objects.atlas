@@ -1,0 +1,111 @@
+
+objects.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+bar
+  rotate: false
+  xy: 404, 465
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+bar9
+  rotate: false
+  xy: 2, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red7logo
+  rotate: false
+  xy: 2, 70
+  size: 230, 155
+  orig: 230, 155
+  offset: 0, 0
+  index: -1
+red7logo_large
+  rotate: false
+  xy: 2, 227
+  size: 400, 270
+  orig: 400, 270
+  offset: 0, 0
+  index: -1
+red7logo_small
+  rotate: false
+  xy: 234, 114
+  size: 165, 111
+  orig: 165, 111
+  offset: 0, 0
+  index: -1
+smallbar9
+  rotate: false
+  xy: 36, 18
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+solid_black32x32
+  rotate: false
+  xy: 234, 80
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_blue32x32
+  rotate: false
+  xy: 404, 431
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_clear32x32
+  rotate: false
+  xy: 438, 465
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_green32x32
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_lime32x32
+  rotate: false
+  xy: 36, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_red32x32
+  rotate: false
+  xy: 268, 80
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_white32x32
+  rotate: false
+  xy: 404, 397
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+solid_yellow32x32
+  rotate: false
+  xy: 438, 431
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+spaceship_small
+  rotate: false
+  xy: 472, 466
+  size: 21, 31
+  orig: 21, 31
+  offset: 0, 0
+  index: -1

@@ -51,26 +51,27 @@ public class Gfx
 
     public static int   TERMINAL_VELOCITY;
     public static float PIXELS_TO_METERS;
+
     public static float HUD_SCENE_WIDTH;
     public static float HUD_SCENE_HEIGHT;
     public static float GAME_SCENE_WIDTH;
     public static float GAME_SCENE_HEIGHT;
-    public static float PARALLAX_SCENE_WIDTH;
-    public static float PARALLAX_SCENE_HEIGHT;
-    // #################################################################
-    // The following must be initialised in the local codebase.
-    // Once that is done, setData() MUST be called.
-    //
+
     // Pixels Per Meter in the Box2D World, usually the length of a single TiledMap tile.
     public static float PPM;
-    public static int   HUD_WIDTH;                   // Width in pixels of the HUD
-    public static int   HUD_HEIGHT;                  // Height in pixels of the HUD
-    public static int   DESKTOP_WIDTH;               // Width in pixels of the Desktop window
-    public static int   DESKTOP_HEIGHT;              // Height in pixels of the Desktop window
-    public static int   VIEW_WIDTH;                  // Width in pixels of the game view
-    public static int   VIEW_HEIGHT;                 // Height in pixels of the game view
-    public static int   PARALLAX_VIEW_WIDTH;         // Width in pixels of the parallax view
-    public static int   PARALLAX_VIEW_HEIGHT;        // Height in pixels of the parallax view
+
+    // Width, Height of the HUD in pixels
+    public static int   HUD_WIDTH;
+    public static int   HUD_HEIGHT;
+
+    // Width, Height of the Game Window in pixels
+    public static int   DESKTOP_WINDOW_WIDTH;
+    public static int   DESKTOP_WINDOW_HEIGHT;
+
+    // Width, Height of the Game View in pixels
+    // This can be different to the Game Window, which allows for varying resolutions.
+    public static int   GAME_VIEW_WIDTH;
+    public static int   GAME_VIEW_HEIGHT;
 
     // -----------------------------------------------------------
     // Code
@@ -101,22 +102,20 @@ public class Gfx
     {
         HUD_SCENE_WIDTH       = ( HUD_WIDTH / PPM );
         HUD_SCENE_HEIGHT      = ( HUD_HEIGHT / PPM );
-        GAME_SCENE_WIDTH      = ( VIEW_WIDTH / PPM );
-        GAME_SCENE_HEIGHT     = ( VIEW_HEIGHT / PPM );
-        PARALLAX_SCENE_WIDTH  = ( PARALLAX_VIEW_WIDTH / PPM );
-        PARALLAX_SCENE_HEIGHT = ( PARALLAX_VIEW_HEIGHT / PPM );
+        GAME_SCENE_WIDTH      = ( GAME_VIEW_WIDTH / PPM );
+        GAME_SCENE_HEIGHT     = ( GAME_VIEW_HEIGHT / PPM );
     }
 
     public static Vector2 getScreenSizeInMeters()
     {
-        meterDimensions.set( VIEW_WIDTH * PIXELS_TO_METERS, VIEW_HEIGHT * PIXELS_TO_METERS );
+        meterDimensions.set( GAME_VIEW_WIDTH * PIXELS_TO_METERS, GAME_VIEW_HEIGHT * PIXELS_TO_METERS );
 
         return meterDimensions;
     }
 
     public static Vector2 getScreenSizeInPixels()
     {
-        pixelDimensions.set( VIEW_WIDTH, VIEW_HEIGHT );
+        pixelDimensions.set( GAME_VIEW_WIDTH, GAME_VIEW_HEIGHT );
 
         return pixelDimensions;
     }
@@ -127,34 +126,28 @@ public class Gfx
     }
 
     /**
-     * Sets the viewport and app window dimensions
-     * for Android builds.
+     * Sets the viewport and app window dimensions for Android builds.
      */
     public static void setAndroidDimensions()
     {
-        VIEW_WIDTH           = 960;
-        VIEW_HEIGHT          = 540;
-        HUD_WIDTH            = 1280;
-        HUD_HEIGHT           = 720;
-        DESKTOP_WIDTH        = 1152;
-        DESKTOP_HEIGHT       = 650;
-        PARALLAX_VIEW_WIDTH  = 480;
-        PARALLAX_VIEW_HEIGHT = 270;
+        DESKTOP_WINDOW_WIDTH  = 1152;
+        DESKTOP_WINDOW_HEIGHT = 650;
+        GAME_VIEW_WIDTH       = 1280;
+        GAME_VIEW_HEIGHT      = 720;
+        HUD_WIDTH             = 1280;
+        HUD_HEIGHT            = 720;
     }
 
     /**
-     * Sets the viewport and app window dimensions
-     * for LWJGL2 and LWJGL3 (Desktop) builds.
+     * Sets the viewport and app window dimensions for LWJGL2 and LWJGL3 (Desktop) builds.
      */
     public static void setDesktopDimensions()
     {
-        VIEW_WIDTH           = 960;
-        VIEW_HEIGHT          = 540;
-        HUD_WIDTH            = 1280;
-        HUD_HEIGHT           = 720;
-        DESKTOP_WIDTH        = 1152;
-        DESKTOP_HEIGHT       = 650;
-        PARALLAX_VIEW_WIDTH  = 480;
-        PARALLAX_VIEW_HEIGHT = 270;
+        DESKTOP_WINDOW_WIDTH  = 1152;
+        DESKTOP_WINDOW_HEIGHT = 650;
+        GAME_VIEW_WIDTH       = 1280;
+        GAME_VIEW_HEIGHT      = 720;
+        HUD_WIDTH             = 1280;
+        HUD_HEIGHT            = 720;
     }
 }

@@ -1,10 +1,11 @@
 package com.richikin.asteroids.core;
 
-import com.richikin.asteroids.audio.AudioData;
+import com.richikin.asteroids.config.Settings;
 import com.richikin.asteroids.enums.ActionStates;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.GameAssets;
 import com.richikin.asteroids.input.ControllerType;
+import com.richikin.asteroids.utils.Developer;
 import com.richikin.asteroids.utils.Trace;
 
 public class MainGameHandler
@@ -122,13 +123,13 @@ public class MainGameHandler
             App.getGameRenderer().enableAllCameras();
             App.getGameRenderer().disableLerping();
 
-            App.getAudio().playGameTune( true );
+//            App.getAudio().playGameTune( true );
         }
 
-        App.getHud().getPanelManager().addZoomPanel( GameAssets.GETREADY_MSG, 1500 );
+        App.getPanelManager().addZoomPanel( GameAssets.GETREADY_MSG, 1500 );
 
         App.getAppState().set( StateID._STATE_GET_READY );
-        App.getGameManager().gameSetupDone = true;
+        App.getGameManager().isGameSetupDone = true;
 
         isWaitingForPlayer = true;
 
@@ -146,7 +147,7 @@ public class MainGameHandler
         //
         // If there is no 'Get Ready' message on screen then setup
         // flow control to play the game.
-        if ( !App.getHud().getPanelManager().panelExists( GameAssets._GETREADY_MSG_ASSET ) )
+        if ( !App.getPanelManager().panelExists( GameAssets.GETREADY_MSG ) )
         {
             Trace.dbg( "----- START GAME (GET READY) -----" );
 
@@ -154,13 +155,20 @@ public class MainGameHandler
             App.getHud().setStateID( StateID._STATE_PANEL_UPDATE );
 
             // If game has virtual/onscreen controls...
-            if ( GdxSystem.inst().availableInputs.contains( ControllerType._JOYSTICK, true ) )
+            if ( App.getAppConfig().availableInputs.contains( ControllerType._JOYSTICK, true ) )
             {
                 App.getHud().showControls( true );
                 App.getHud().showPauseButton( true );
             }
 
             App.getMainScene().firstTime = false;
+
+            if ( Developer.isDevMode() )
+            {
+                App.getGameRenderer().getBackgroundCamera().debug();
+                App.getGameRenderer().getSpriteGameCamera().debug();
+                App.getGameRenderer().getHudGameCamera().debug();
+            }
         }
     }
 
@@ -179,7 +187,7 @@ public class MainGameHandler
         {
             case _STATE_DEVELOPER_PANEL:
             {
-                if ( App.getDev().getDeveloperPanelState() == StateID._STATE_DISABLED )
+                if ( Developer.getDeveloperPanelState() == StateID._STATE_DISABLED )
                 {
                     App.getAppState().set( StateID._STATE_GAME );
                     App.getHud().setStateID( StateID._STATE_PANEL_UPDATE );
@@ -198,18 +206,12 @@ public class MainGameHandler
 
             default:
             {
-//                boolean isLerpingEnabled = (App.getAppState().peek() == StateID._STATE_GAME );
-//
-//                App.getBaseRenderer().getTiledGameCamera().isLerpingEnabled = isLerpingEnabled;
-//                App.getBaseRenderer().getSpriteGameCamera().isLerpingEnabled = isLerpingEnabled;
-//                App.getBaseRenderer().getOverlayCamera().isLerpingEnabled = isLerpingEnabled;
-
                 if ( isWaitingForPlayer && ( App.getPlayer().getActionState() == ActionStates._STANDING ) )
                 {
-                    if ( App.getSettings().isEnabled( LocalSettings._INTRO_PANEL ) )
+                    if ( App.getSettings().isEnabled( Settings._INTRO_PANEL ) )
                     {
-                        App.getHud().introPanel = new IntroPanel();
-                        App.getHud().introPanel.create();
+//                        App.getHud().introPanel = new IntroPanel();
+//                        App.getHud().introPanel.create();
 
                         App.getHud().setStateID( StateID._STATE_WELCOME_PANEL );
                         App.getAppState().set( StateID._STATE_WELCOME_PANEL );
@@ -225,12 +227,12 @@ public class MainGameHandler
                     App.getEntityManager().tidySprites();
 
                     // Check for game ending
-                    if ( !App.getMainScene().endgameManager.update() )
+                    if ( !App.getGameManager().updateEndgame() )
                     {
                         // Tasks to perform if the game has not ended
                         if ( App.getAppState().peek() == StateID._STATE_PAUSED )
                         {
-                            if ( !GdxSystem.inst().gamePaused )
+                            if ( !App.getAppConfig().gamePaused )
                             {
                                 App.getAppState().set( StateID._STATE_GAME );
                             }
@@ -259,7 +261,7 @@ public class MainGameHandler
     private void stateMessagePanel()
     {
         App.getHud().update();
-        App.getMapData().update();
+//        App.getMapData().update();
 
 //        if ( !App.getConversationManager().update() )
 //        {
@@ -315,7 +317,7 @@ public class MainGameHandler
      */
     private void stateSetForLevelFinished()
     {
-        App.getLevelManager().closeCurrentLevel();
+        App.getGameManager().closeCurrentLevel();
         App.getHud().update();
 
         App.getMainScene().reset();
@@ -330,9 +332,9 @@ public class MainGameHandler
      */
     private void stateSetForGameOverMessage()
     {
-        App.getHud().getPanelManager().addZoomPanel( GameAssets._GAMEOVER_MSG_ASSET, 3000 );
+        App.getPanelManager().addZoomPanel( GameAssets.GAMEOVER_MSG, 3000 );
 
-        App.getAudio().startSound( AudioData.SFX_LOST );
+//        App.getAudio().startSound( AudioData.SFX_LOST );
 
         App.getAppState().set( StateID._STATE_GAME_OVER );
     }
@@ -348,7 +350,7 @@ public class MainGameHandler
     {
         App.getHud().update();
 
-        if ( !App.getHud().getPanelManager().panelExists( GameAssets._GAMEOVER_MSG_ASSET ) )
+        if ( !App.getPanelManager().panelExists( GameAssets.GAMEOVER_MSG ) )
         {
             App.getAppState().set( StateID._STATE_END_GAME );
         }
@@ -363,7 +365,8 @@ public class MainGameHandler
     {
         Trace.boxedDbg( "***** GAME OVER *****" );
 
-        App.getAudio().playGameTune( false );
+//        App.getAudio().playGameTune( false );
+
         App.getMainGame().setScreen( App.getTitleScene() );
     }
 }

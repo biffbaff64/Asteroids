@@ -32,8 +32,8 @@ public class StarObject implements Disposable
     public void update( float speed )
     {
         if ( ( position.z < 0 ) || ( position.z > FINAL_DEPTH )
-            || ( position.y < -Gfx.VIEW_HEIGHT ) || ( position.y > Gfx.VIEW_HEIGHT )
-            || ( position.x < -Gfx.VIEW_WIDTH ) || ( position.x > Gfx.VIEW_WIDTH ) )
+            || ( position.y < -Gfx.GAME_VIEW_HEIGHT ) || ( position.y > Gfx.GAME_VIEW_HEIGHT )
+            || ( position.x < -Gfx.GAME_VIEW_WIDTH ) || ( position.x > Gfx.GAME_VIEW_WIDTH ) )
         {
             resetPosition();
         }
@@ -47,8 +47,8 @@ public class StarObject implements Disposable
     {
         update( speed );
 
-        float x = ( position.x / position.z ) * ( Gfx.VIEW_WIDTH * 0.5f );
-        float y = ( position.y / position.z ) * ( Gfx.VIEW_HEIGHT * 0.5f );
+        float x = ( position.x / position.z ) * ( Gfx.GAME_VIEW_WIDTH * 0.5f );
+        float y = ( position.y / position.z ) * ( Gfx.GAME_VIEW_HEIGHT * 0.5f );
 
         float radius = ( ( MAXIMUM_STAR_RADIUS - ( ( position.z * MAXIMUM_STAR_RADIUS ) * 0.0025f ) ) * velocity.z ) * 0.2f;
 
@@ -57,8 +57,8 @@ public class StarObject implements Disposable
 
     private void resetPosition()
     {
-        position.x = MathUtils.random( -Gfx.VIEW_WIDTH, Gfx.VIEW_WIDTH );
-        position.y = MathUtils.random( -Gfx.VIEW_HEIGHT, Gfx.VIEW_HEIGHT );
+        position.x = MathUtils.random( -Gfx.GAME_VIEW_WIDTH, Gfx.GAME_VIEW_WIDTH );
+        position.y = MathUtils.random( -Gfx.GAME_VIEW_HEIGHT, Gfx.GAME_VIEW_HEIGHT );
         position.z = MathUtils.random( INITIAL_DEPTH, FINAL_DEPTH );
         velocity.z = MathUtils.random( MINIMUM_VELOCITY, MAXIMUM_VELOCITY );
     }

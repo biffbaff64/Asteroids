@@ -2,6 +2,7 @@ package com.richikin.asteroids.graphics.renderers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -16,9 +17,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class GameRenderer implements Disposable
 {
-    private static final float DEFAULT_HUD_ZOOM      = 1.0f;
-    private static final float DEFAULT_PARALLAX_ZOOM = 1.0f;
-    private static final float DEFAULT_MAP_ZOOM      = 1.0f;
+    private static final float DEFAULT_HUD_ZOOM = 1.0f;
+    private static final float DEFAULT_MAP_ZOOM = 1.0f;
 
     private OrthoGameCamera hudGameCamera;
     private OrthoGameCamera spriteGameCamera;
@@ -47,7 +47,7 @@ public class GameRenderer implements Disposable
         App.getAppConfig().camerasReady = false;
 
         // --------------------------------------
-        // Camera for displaying the starfield background.
+        // Camera for displaying the star field background.
         backgroundCamera = new OrthoGameCamera
             (
                 Gfx.GAME_SCENE_WIDTH, Gfx.GAME_SCENE_HEIGHT,
@@ -66,7 +66,7 @@ public class GameRenderer implements Disposable
 
         // --------------------------------------
         // Camera for displaying the HUD
-        // Using a seperate camera to allow camera effects to be applied
+        // Using a separate camera to allow camera effects to be applied
         // to mainGameCamera without affecting the hud.
         hudGameCamera = new OrthoGameCamera
             (
@@ -85,7 +85,7 @@ public class GameRenderer implements Disposable
         spriteGameCamera.setCameraZoom( DEFAULT_MAP_ZOOM );
         hudGameCamera.setCameraZoom( DEFAULT_HUD_ZOOM );
 
-        isDrawingStage             = false;
+        isDrawingStage                  = false;
         App.getAppConfig().camerasReady = true;
     }
 
@@ -252,6 +252,18 @@ public class GameRenderer implements Disposable
         backgroundCamera.isLerpingEnabled = false;
         spriteGameCamera.isLerpingEnabled = false;
         hudGameCamera.isLerpingEnabled    = false;
+    }
+
+    private final Rectangle gameWindow = new Rectangle();
+
+    public Rectangle getGameWindow()
+    {
+        gameWindow.x = spriteGameCamera.getPosition().x;
+        gameWindow.y = spriteGameCamera.getPosition().y;
+        gameWindow.width = spriteGameCamera.viewport.getScreenWidth();
+        gameWindow.height = spriteGameCamera.viewport.getScreenHeight();
+
+        return gameWindow;
     }
 
     public OrthoGameCamera getHudGameCamera()
