@@ -7,7 +7,7 @@ import com.richikin.asteroids.utils.Trace;
 public class StarField implements Disposable
 {
     public final float speed    = 40f;
-    public final int   numStars = 5000;
+    public final int   numStars = 200; //5000;
 
     private Array< StarObject > stars;
 

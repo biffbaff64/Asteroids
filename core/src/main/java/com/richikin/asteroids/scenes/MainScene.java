@@ -9,6 +9,7 @@ import com.richikin.asteroids.enums.ScreenID;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.camera.OrthoGameCamera;
 import com.richikin.asteroids.graphics.camera.Shake;
+import com.richikin.asteroids.graphics.starfield.StarField;
 import com.richikin.asteroids.input.ControllerType;
 import com.richikin.asteroids.utils.Developer;
 import com.richikin.asteroids.utils.StopWatch;
@@ -47,7 +48,7 @@ public class MainScene extends AbstractBaseScene
             Trace.divider( '#' );
 
 //            gameCompletedPanel = new GameCompletedPanel();
-            mainGameHandler    = new MainGameHandler();
+            mainGameHandler = new MainGameHandler();
 
             App.getGameManager().prepareNewGame();
 

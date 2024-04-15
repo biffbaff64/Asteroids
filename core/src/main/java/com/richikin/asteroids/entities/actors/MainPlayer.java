@@ -273,7 +273,7 @@ public class MainPlayer extends GdxSprite
         {
             case _SPAWNING:
             {
-                if ( animation.isAnimationFinished( elapsedAnimTime ) )
+//                if ( animation.isAnimationFinished( elapsedAnimTime ) )
                 {
                     setActionState( ActionStates._STANDING );
                 }
@@ -310,7 +310,7 @@ public class MainPlayer extends GdxSprite
                 }
 
 //                buttons.checkButtons();
-//                movePlayer();
+                movePlayer();
             }
             break;
 
@@ -370,6 +370,9 @@ public class MainPlayer extends GdxSprite
 
     private void movePlayer()
     {
+        isRotating = true;
+        rotateSpeed = 2.0f;
+
         speed.x = ( isMovingX ? PLAYER_X_SPEED : 0 );
 
         if ( isMovingX )

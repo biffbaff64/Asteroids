@@ -19,7 +19,7 @@ public class SpriteDescriptor
     public String             _ASSET;        // The initial image asset.
     public int                _FRAMES;       // Number of frames in the asset above.
     public GraphicID          _TYPE;         // _MAIN, _INTERACTIVE, _PICKUP etc
-    public Vec3               _POSITION;     // X, Y Pos of tile, in TileWidth units, Z-Sort value.
+    public Vec3               _POSITION;     // X, Y Pos of tile in TileWidth units, Z-Sort value.
     public Vec2               _SIZE;         // Width and Height.
     public int                _INDEX;        // This entity's position in the entity map.
     public Animation.PlayMode _PLAYMODE;     // Animation playmode for the asset frames above.

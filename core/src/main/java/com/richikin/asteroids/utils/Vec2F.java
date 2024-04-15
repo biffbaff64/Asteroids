@@ -33,4 +33,10 @@ public class Vec2F
     {
         return x == 0 && y == 0;
     }
+
+    @Override
+    public String toString()
+    {
+        return "x: " + x + ", y: " + y;
+    }
 }

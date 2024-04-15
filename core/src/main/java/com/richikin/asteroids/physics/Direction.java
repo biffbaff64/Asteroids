@@ -1,8 +1,8 @@
 package com.richikin.asteroids.physics;
 
-import com.badlogic.gdx.math.Vector2;
+import com.richikin.asteroids.utils.Vec2;
 
-public class Direction extends Vector2
+public class Direction extends Vec2
 {
     public Direction()
     {

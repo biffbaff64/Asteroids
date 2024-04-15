@@ -28,7 +28,11 @@ public enum GraphicID
 
     // ----------------------------
     // Enemies
-    G_ASTEROID,
+    G_BIG_ASTEROID,
+    G_MID_ASTEROID,
+    G_SMALL_ASTEROID,
+
+    G_UFO,
 
     // #########################################################
     // Generic IDs
@@ -42,7 +46,8 @@ public enum GraphicID
 
     // ----------------------------
     // Managers
-    _ENEMY_MANAGER,
+    _ASTEROID_MANAGER,
+    _UFO_MANAGER,
     _PLAYER_MANAGER,
 
     // ----------------------------

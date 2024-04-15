@@ -25,6 +25,52 @@ public class Entities
                     new Vec2( 64, 64 ),
                     Animation.PlayMode.LOOP
                 ),
+
+            new SpriteDescriptor
+                (
+                    "Bullet",
+                    GraphicID.G_PLAYER_WEAPON, GraphicID._MAIN,
+                    GameAssets.BULLET, GameAssets.BULLET_FRAMES,
+                    new Vec2( 15, 15 ),
+                    Animation.PlayMode.LOOP
+                ),
+            // -----------------------------------------------------
+            // Asteroids
+            new SpriteDescriptor
+                (
+                    "Big Asteroid",
+                    GraphicID.G_BIG_ASTEROID, GraphicID._ENEMY,
+                    GameAssets.ASTEROID_LARGE, GameAssets.ASTEROID_FRAMES,
+                    new Vec2( 79, 79 ),
+                    Animation.PlayMode.NORMAL
+                ),
+            new SpriteDescriptor
+                (
+                    "Medium Asteroid",
+                    GraphicID.G_MID_ASTEROID, GraphicID._ENEMY,
+                    GameAssets.ASTEROID_MEDIUM, GameAssets.ASTEROID_FRAMES,
+                    new Vec2( 47, 47 ),
+                    Animation.PlayMode.NORMAL
+                ),
+            new SpriteDescriptor
+                (
+                    "Small Asteroid",
+                    GraphicID.G_SMALL_ASTEROID, GraphicID._ENEMY,
+                    GameAssets.ASTEROID_SMALL, GameAssets.ASTEROID_FRAMES,
+                    new Vec2( 31, 31 ),
+                    Animation.PlayMode.NORMAL
+                ),
+
+            // -----------------------------------------------------
+            // UFO
+            new SpriteDescriptor
+                (
+                    "UFO",
+                    GraphicID.G_UFO, GraphicID._ENEMY,
+                    GameAssets.UFO, GameAssets.UFO_FRAMES,
+                    new Vec2( 47, 39 ),
+                    Animation.PlayMode.NORMAL
+                ),
         };
 
     // ------------------------------------------------------------------------

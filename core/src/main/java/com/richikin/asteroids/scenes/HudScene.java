@@ -16,6 +16,8 @@ import com.richikin.asteroids.input.Switch;
 import com.richikin.asteroids.utils.Scene2DUtils;
 import com.richikin.asteroids.utils.Trace;
 
+import java.util.Locale;
+
 public class HudScene implements Disposable
 {
     public static final int _VERY_LARGE_FONT_SIZE = 48;
@@ -29,7 +31,6 @@ public class HudScene implements Disposable
     public static final int _SHOOT        = 3;
     public static final int _SCORE        = 4;
     public static final int _LIVES        = 5;
-    public static final int _LEVEL        = 6;
 
     private static final int _X      = 0;
     private static final int _Y      = 1;
@@ -47,8 +48,7 @@ public class HudScene implements Disposable
             // ----------------------------------------
             // Y is distance from the TOP of the screen
             {   42,   20,    0,    0 },             // Score
-            { 1102,   50,   21,   31 },             // Lives
-            { 1200,   64,    0,    0 },             // Level
+            {   42,   88,   21,   31 },             // Lives
         };
     //@formatter:on
 
@@ -143,6 +143,7 @@ public class HudScene implements Disposable
 
     private void updateScoreDisplay()
     {
+        App.getGameManager().score.add( 1, 99999999 );
     }
 
     /**
@@ -193,9 +194,9 @@ public class HudScene implements Disposable
 
     private void drawItems()
     {
-        midFont.setColor( Color.WHITE );
-        midFont.draw( App.getSpriteBatch(),
-            "SCORE: ",
+        bigFont.setColor( Color.WHITE );
+        bigFont.draw( App.getSpriteBatch(),
+            String.format( Locale.UK, "%08d", App.getGameManager().score.getTotal()),
             displayPos[ _SCORE ][ _X ],
             Gfx.HUD_HEIGHT - displayPos[ _SCORE ][ _Y ] );
     }
@@ -232,9 +233,9 @@ public class HudScene implements Disposable
     {
         FontUtils fontUtils = new FontUtils();
 
-        bigFont   = fontUtils.createFont( GameAssets.MODENINE_FONT, _VERY_LARGE_FONT_SIZE );
-        midFont   = fontUtils.createFont( GameAssets.MODENINE_FONT, _LARGE_FONT_SIZE );
-        smallFont = fontUtils.createFont( GameAssets.MODENINE_FONT, _SMALL_FONT_SIZE );
+        bigFont   = fontUtils.createFont( "advanced_pixel-7.TTF", _VERY_LARGE_FONT_SIZE );
+        midFont   = fontUtils.createFont( "advanced_pixel-7.TTF", _LARGE_FONT_SIZE );
+        smallFont = fontUtils.createFont( "advanced_pixel-7.TTF", _SMALL_FONT_SIZE );
     }
 
     /**

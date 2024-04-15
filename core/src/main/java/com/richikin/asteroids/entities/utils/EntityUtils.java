@@ -54,7 +54,7 @@ public class EntityUtils
 
         switch ( graphicID )
         {
-            case G_ASTEROID:
+            case G_BIG_ASTEROID:
             {
                 zed = 3;
             }

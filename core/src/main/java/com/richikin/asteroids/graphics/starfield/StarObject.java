@@ -14,7 +14,7 @@ public class StarObject implements Disposable
     private static final float FINAL_DEPTH         = 1000.0f;
     private static final float MINIMUM_VELOCITY    = 0.5f;
     private static final float MAXIMUM_VELOCITY    = 5.0f;
-    private static final float MAXIMUM_STAR_RADIUS = 12.0f;
+    private static final float MAXIMUM_STAR_RADIUS = 4.0f;
 
     private Vector3       position;
     private Vector3       velocity;

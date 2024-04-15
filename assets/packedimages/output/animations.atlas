@@ -4,100 +4,44 @@ size: 512, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-asteroid1_big
+asteroid_big
   rotate: false
-  xy: 2, 43
-  size: 79, 79
-  orig: 79, 79
+  xy: 2, 36
+  size: 237, 79
+  orig: 237, 79
   offset: 0, 0
   index: -1
-asteroid1_medium
+asteroid_medium
   rotate: false
-  xy: 377, 75
-  size: 47, 47
-  orig: 47, 47
+  xy: 241, 2
+  size: 141, 47
+  orig: 141, 47
   offset: 0, 0
   index: -1
-asteroid1_small
+asteroid_small
   rotate: false
-  xy: 475, 91
-  size: 31, 31
-  orig: 31, 31
+  xy: 2, 3
+  size: 93, 31
+  orig: 93, 31
   offset: 0, 0
   index: -1
-asteroid2_big
+bullet
   rotate: false
-  xy: 83, 43
-  size: 79, 79
-  orig: 79, 79
-  offset: 0, 0
-  index: -1
-asteroid2_medium
-  rotate: false
-  xy: 426, 75
-  size: 47, 47
-  orig: 47, 47
-  offset: 0, 0
-  index: -1
-asteroid2_small
-  rotate: false
-  xy: 51, 10
-  size: 31, 31
-  orig: 31, 31
-  offset: 0, 0
-  index: -1
-asteroid3_big
-  rotate: false
-  xy: 164, 43
-  size: 79, 79
-  orig: 79, 79
-  offset: 0, 0
-  index: -1
-asteroid3_medium
-  rotate: false
-  xy: 377, 26
-  size: 47, 47
-  orig: 47, 47
-  offset: 0, 0
-  index: -1
-asteroid3_small
-  rotate: false
-  xy: 426, 42
-  size: 31, 31
-  orig: 31, 31
-  offset: 0, 0
-  index: -1
-bullet1
-  rotate: false
-  xy: 84, 26
-  size: 15, 15
-  orig: 15, 15
-  offset: 0, 0
-  index: -1
-bullet2
-  rotate: false
-  xy: 101, 26
-  size: 15, 15
-  orig: 15, 15
+  xy: 97, 19
+  size: 30, 15
+  orig: 30, 15
   offset: 0, 0
   index: -1
 spaceship
   rotate: false
-  xy: 245, 58
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-spaceship_thrust
-  rotate: false
-  xy: 311, 58
-  size: 64, 64
-  orig: 64, 64
+  xy: 241, 51
+  size: 128, 64
+  orig: 128, 64
   offset: 0, 0
   index: -1
 ufo
   rotate: false
-  xy: 2, 2
+  xy: 371, 76
   size: 47, 39
   orig: 47, 39
   offset: 0, 0

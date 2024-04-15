@@ -12,6 +12,7 @@ import com.richikin.asteroids.graphics.Gfx;
 import com.richikin.asteroids.graphics.camera.OrthoGameCamera;
 import com.richikin.asteroids.graphics.camera.ViewportType;
 import com.richikin.asteroids.graphics.camera.Zoom;
+import com.richikin.asteroids.graphics.starfield.StarField;
 import com.richikin.asteroids.utils.Trace;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,7 @@ public class GameRenderer implements Disposable
     private Zoom            gameZoom;
     private Zoom            hudZoom;
     private boolean         isDrawingStage;
+    private StarField       starField;
 
     private WorldRenderer worldRenderer;
     private HudRenderer   hudRenderer;
@@ -54,6 +56,8 @@ public class GameRenderer implements Disposable
                 ViewportType._STRETCH,
                 "Tiled Cam"
             );
+
+        starField = new StarField();
 
         // --------------------------------------
         // Camera for displaying game scene, usually just sprites.
@@ -120,8 +124,8 @@ public class GameRenderer implements Disposable
             App.getSpriteBatch().setProjectionMatrix( backgroundCamera.camera.combined );
             App.getSpriteBatch().begin();
 
-            cameraPos.x = ( backgroundCamera.camera.viewportWidth / 2 );
-            cameraPos.y = ( backgroundCamera.camera.viewportHeight / 2 );
+            cameraPos.x = 0;    //( backgroundCamera.camera.viewportWidth / 2 );
+            cameraPos.y = 0;    //( backgroundCamera.camera.viewportHeight / 2 );
             cameraPos.z = 0;
 
             if ( backgroundCamera.isLerpingEnabled )
@@ -132,6 +136,8 @@ public class GameRenderer implements Disposable
             {
                 backgroundCamera.setPosition( cameraPos, gameZoom.getZoomValue(), true );
             }
+
+            starField.render();
 
             App.getSpriteBatch().end();
         }
@@ -258,9 +264,9 @@ public class GameRenderer implements Disposable
 
     public Rectangle getGameWindow()
     {
-        gameWindow.x = spriteGameCamera.getPosition().x;
-        gameWindow.y = spriteGameCamera.getPosition().y;
-        gameWindow.width = spriteGameCamera.viewport.getScreenWidth();
+        gameWindow.x      = spriteGameCamera.getPosition().x;
+        gameWindow.y      = spriteGameCamera.getPosition().y;
+        gameWindow.width  = spriteGameCamera.viewport.getScreenWidth();
         gameWindow.height = spriteGameCamera.viewport.getScreenHeight();
 
         return gameWindow;

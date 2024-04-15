@@ -37,4 +37,10 @@ public class Vec3F
     {
         return x == 0 && y == 0 && z == 0;
     }
+
+    @Override
+    public String toString()
+    {
+        return "x: " + x + ", y: " + y + ", z: " + z;
+    }
 }

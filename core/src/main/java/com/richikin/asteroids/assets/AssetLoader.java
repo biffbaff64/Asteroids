@@ -268,7 +268,7 @@ public class AssetLoader implements com.richikin.asteroids.assets.Assets
     @Override
     public TextureRegion getStarfieldObject()
     {
-        return null;
+        return getObjectRegion( "solid_white32x32" );
     }
 
     /**
