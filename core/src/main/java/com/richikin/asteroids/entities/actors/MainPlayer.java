@@ -41,7 +41,7 @@ public class MainPlayer extends GdxSprite
         create( descriptor );
 
         bodyCategory = Gfx.CAT_PLAYER;
-        collidesWith = Gfx.CAT_COLLECTIBLE;
+        collidesWith = Gfx.CAT_MOBILE_ENEMY;
 
         createBody( PhysicsBodyType.KINEMATIC );
 
@@ -65,16 +65,15 @@ public class MainPlayer extends GdxSprite
 
         strength = GameConstants.MAX_STRENGTH;
 
-        isMovingX       = false;
-        isMovingY       = false;
-        isRotating      = false;
-        isFlippedX      = false;
-        isFlippedY      = false;
-        canFlip         = true;
-        isDrawable      = true;
-        isHurting       = false;
-
-        sprite.setRotation( 0 );
+        isMovingX   = false;
+        isMovingY   = false;
+        isRotating  = false;
+        isFlippedX  = false;
+        isFlippedY  = false;
+        canFlip     = true;
+        isDrawable  = true;
+        isHurting   = false;
+        isAnimating = false;
 
         isSetupCompleted = true;
 
@@ -255,8 +254,8 @@ public class MainPlayer extends GdxSprite
 
             setActionState( ActionStates._RESETTING );
 
-            App.getGameManager().isRestarting   = false;
-            App.getGameManager().isGameOver     = false;
+            App.getGameManager().isRestarting = false;
+            App.getGameManager().isGameOver   = false;
         }
         else
         {
@@ -370,9 +369,6 @@ public class MainPlayer extends GdxSprite
 
     private void movePlayer()
     {
-        isRotating = true;
-        rotateSpeed = 2.0f;
-
         speed.x = ( isMovingX ? PLAYER_X_SPEED : 0 );
 
         if ( isMovingX )

@@ -1,47 +1,47 @@
 
 animations.png
-size: 512, 128
+size: 1024, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 asteroid_big
   rotate: false
-  xy: 2, 36
-  size: 237, 79
-  orig: 237, 79
+  xy: 2, 19
+  size: 288, 96
+  orig: 288, 96
   offset: 0, 0
   index: -1
 asteroid_medium
   rotate: false
-  xy: 241, 2
-  size: 141, 47
-  orig: 141, 47
+  xy: 292, 51
+  size: 192, 64
+  orig: 192, 64
   offset: 0, 0
   index: -1
 asteroid_small
   rotate: false
-  xy: 2, 3
+  xy: 616, 84
   size: 93, 31
   orig: 93, 31
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 97, 19
+  xy: 2, 2
   size: 30, 15
   orig: 30, 15
   offset: 0, 0
   index: -1
 spaceship
   rotate: false
-  xy: 241, 51
+  xy: 486, 51
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 ufo
   rotate: false
-  xy: 371, 76
+  xy: 616, 43
   size: 47, 39
   orig: 47, 39
   offset: 0, 0

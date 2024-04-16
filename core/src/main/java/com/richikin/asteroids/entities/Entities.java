@@ -41,7 +41,7 @@ public class Entities
                     "Big Asteroid",
                     GraphicID.G_BIG_ASTEROID, GraphicID._ENEMY,
                     GameAssets.ASTEROID_LARGE, GameAssets.ASTEROID_FRAMES,
-                    new Vec2( 79, 79 ),
+                    new Vec2( 96, 96 ),
                     Animation.PlayMode.NORMAL
                 ),
             new SpriteDescriptor
@@ -49,7 +49,7 @@ public class Entities
                     "Medium Asteroid",
                     GraphicID.G_MID_ASTEROID, GraphicID._ENEMY,
                     GameAssets.ASTEROID_MEDIUM, GameAssets.ASTEROID_FRAMES,
-                    new Vec2( 47, 47 ),
+                    new Vec2( 64, 64 ),
                     Animation.PlayMode.NORMAL
                 ),
             new SpriteDescriptor
@@ -65,7 +65,7 @@ public class Entities
             // UFO
             new SpriteDescriptor
                 (
-                    "UFO",
+                    "Ufo",
                     GraphicID.G_UFO, GraphicID._ENEMY,
                     GameAssets.UFO, GameAssets.UFO_FRAMES,
                     new Vec2( 47, 39 ),

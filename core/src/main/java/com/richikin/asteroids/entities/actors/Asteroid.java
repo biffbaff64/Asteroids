@@ -1,5 +1,7 @@
 package com.richikin.asteroids.entities.actors;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.richikin.asteroids.core.App;
 import com.richikin.asteroids.core.GameConstants;
 import com.richikin.asteroids.entities.objects.GdxSprite;
@@ -11,7 +13,10 @@ import com.richikin.asteroids.graphics.Gfx;
 import com.richikin.asteroids.physics.Direction;
 import com.richikin.asteroids.physics.Movement;
 import com.richikin.asteroids.physics.PhysicsBodyType;
+import com.richikin.asteroids.utils.StopWatch;
 import com.richikin.asteroids.utils.Trace;
+
+import java.util.concurrent.TimeUnit;
 
 public class Asteroid extends GdxSprite
 {
@@ -20,6 +25,8 @@ public class Asteroid extends GdxSprite
     public int     asteroidType;    // 0, 1, or 2
 
     private Direction previousDirection;
+    private StopWatch pauseTimer;
+    private int       pauseDelay;
 
     public Asteroid( GraphicID gid )
     {
@@ -33,39 +40,42 @@ public class Asteroid extends GdxSprite
 
         create( descriptor );
 
-        bodyCategory = Gfx.CAT_PLAYER;
-        collidesWith = Gfx.CAT_COLLECTIBLE;
-
-        createBody( PhysicsBodyType.KINEMATIC );
-
+        bodyCategory      = Gfx.CAT_MOBILE_ENEMY;
+        collidesWith      = Gfx.CAT_PLAYER_WEAPON;
         previousDirection = new Direction();
+        asteroidType      = MathUtils.random( 2 );
+        pauseTimer        = new StopWatch();
+        pauseDelay        = 1000 + ( MathUtils.random( 50 ) * 10 );
 
-        setup( true );
+        createBody( PhysicsBodyType.DYNAMIC );
+
+        getPhysicsBody().body.setGravityScale( 0 );
+
+        setup( true, descriptor );
     }
 
-    public void setup( boolean isSpawning )
+    public void setup( boolean isSpawning, SpriteDescriptor descriptor )
     {
         Trace.checkPoint();
 
-        direction.set( Movement.DIRECTION_STILL, Movement.DIRECTION_STILL );
-        lookingAt.set( Movement.DIRECTION_RIGHT, Movement.DIRECTION_STILL );
-        previousDirection.set( lookingAt );
+        direction.set( descriptor._DIR );
+        speed.set( descriptor._SPEED.x, descriptor._SPEED.y );
+
+        previousDirection.set( direction );
 
         strength = GameConstants.MAX_STRENGTH;
 
         isMovingX  = false;
         isMovingY  = false;
-        isRotating = false;
         isFlippedX = false;
         isFlippedY = false;
         canFlip    = false;
         isDrawable = true;
 
-        sprite.setRotation( 0 );
+        isRotating  = true;
+        rotateSpeed = 0.5f;
 
         isSetupCompleted = true;
-
-        App.getHud().enableHUDButtons();
 
         if ( isSpawning )
         {
@@ -92,7 +102,116 @@ public class Asteroid extends GdxSprite
         updateCommon();
     }
 
+    @Override
+    public void animate()
+    {
+        sprite.setRegion( animFrames[ asteroidType ] );
+    }
+
     private void updateAsteroid()
     {
+        switch ( getActionState() )
+        {
+            case _SPAWNING:
+            {
+                if ( pauseTimer.time( TimeUnit.MILLISECONDS ) < pauseDelay )
+                {
+                    setActionState( ActionStates._RUNNING );
+                }
+            }
+            break;
+
+            case _STANDING:
+            {
+                setActionState( ActionStates._RUNNING );
+            }
+            break;
+
+            case _RUNNING:
+            {
+                if ( !boundsCheck() )
+                {
+                    getPhysicsBody().body.setLinearVelocity( ( speed.x * direction.x ), ( speed.y * direction.y ) );
+                }
+            }
+            break;
+
+            case _WAITING:
+            {
+                if ( pauseTimer.time( TimeUnit.MILLISECONDS ) > 1500 )
+                {
+                    setActionState( ActionStates._STANDING );
+                }
+            }
+            break;
+
+            default:
+            {
+            }
+            break;
+        }
+    }
+
+    private boolean boundsCheck()
+    {
+        boolean hasWrapped = false;
+
+        Vector2 currentVelocity = getPhysicsBody().body.getLinearVelocity();
+
+        if ( direction.x == Movement.DIRECTION_RIGHT )
+        {
+            if ( sprite.getX() > Gfx.GAME_VIEW_WIDTH )
+            {
+                getPhysicsBody().body.setTransform
+                    (
+                        -frameWidth / Gfx.PPM,
+                        sprite.getY() / Gfx.PPM,
+                        getPhysicsBody().body.getAngle()
+                    );
+            }
+        }
+        else if ( direction.x == Movement.DIRECTION_LEFT )
+        {
+            if ( ( sprite.getX() + frameWidth ) < 0 )
+            {
+                getPhysicsBody().body.setTransform
+                    (
+                        Gfx.GAME_VIEW_WIDTH / Gfx.PPM,
+                        sprite.getY() / Gfx.PPM,
+                        getPhysicsBody().body.getAngle()
+                    );
+            }
+        }
+
+        if ( direction.y == Movement.DIRECTION_UP )
+        {
+            if ( sprite.getY() > Gfx.GAME_VIEW_HEIGHT )
+            {
+                getPhysicsBody().body.setTransform
+                    (
+                        sprite.getX() / Gfx.PPM,
+                        -frameHeight / Gfx.PPM,
+                        getPhysicsBody().body.getAngle()
+                    );
+
+                hasWrapped = true;
+            }
+        }
+        else if ( direction.y == Movement.DIRECTION_DOWN )
+        {
+            if ( ( sprite.getY() + frameHeight ) < 0 )
+            {
+                getPhysicsBody().body.setTransform
+                    (
+                        sprite.getX() / Gfx.PPM,
+                        Gfx.GAME_VIEW_HEIGHT / Gfx.PPM,
+                        getPhysicsBody().body.getAngle()
+                    );
+
+                hasWrapped = true;
+            }
+        }
+
+        return hasWrapped;
     }
 }

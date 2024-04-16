@@ -143,7 +143,6 @@ public class HudScene implements Disposable
 
     private void updateScoreDisplay()
     {
-        App.getGameManager().score.add( 1, 99999999 );
     }
 
     /**

@@ -41,7 +41,20 @@ public class AsteroidManager extends BasicEntityManager
     {
         Trace.checkPoint();
 
-        descriptor = App.getEntities().getDescriptor( GraphicID.G_BIG_ASTEROID );
+        int rand = MathUtils.random(100 );
+
+        if ( rand < 5 )
+        {
+            descriptor = App.getEntities().getDescriptor( GraphicID.G_SMALL_ASTEROID );
+        }
+        else if ( rand < 15 )
+        {
+            descriptor = App.getEntities().getDescriptor( GraphicID.G_MID_ASTEROID );
+        }
+        else
+        {
+            descriptor = App.getEntities().getDescriptor( GraphicID.G_BIG_ASTEROID );
+        }
 
         spawn();
 
@@ -80,8 +93,8 @@ public class AsteroidManager extends BasicEntityManager
         descriptor._DIST.x = Gfx.GAME_VIEW_WIDTH;
         descriptor._DIST.y = Gfx.GAME_VIEW_HEIGHT;
 
-        descriptor._SPEED.x = MathUtils.random( 8 ) + 3;
-        descriptor._SPEED.y = MathUtils.random( 8 ) + 3;
+        descriptor._SPEED.x = MathUtils.random( 2.0f ) + 2.5f;
+        descriptor._SPEED.y = MathUtils.random( 2.0f ) + 2.5f;
 
         descriptor.debug();
     }

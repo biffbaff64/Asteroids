@@ -3,10 +3,7 @@ package com.richikin.asteroids.entities.objects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.richikin.asteroids.enums.GraphicID;
 import com.richikin.asteroids.physics.Direction;
-import com.richikin.asteroids.utils.Box;
-import com.richikin.asteroids.utils.Trace;
-import com.richikin.asteroids.utils.Vec2;
-import com.richikin.asteroids.utils.Vec3;
+import com.richikin.asteroids.utils.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -28,7 +25,7 @@ public class SpriteDescriptor
     public int                _LINK;         // Linked GDXSprite (if applicable).
     public Direction          _DIR;          // Initial direction of travel. Useful for moving blocks etc.
     public Vec2               _DIST;         // Initial travel distance. Useful for moving blocks etc.
-    public Vec2               _SPEED;        // Initial speed. Useful for moving blocks etc.
+    public Vec2F              _SPEED;        // Initial speed. Useful for moving blocks etc.
     public Box                _BOX;          //
 
     public SpriteDescriptor()
@@ -124,7 +121,7 @@ public class SpriteDescriptor
         this._PARENT    = new GdxSprite();
         this._DIR       = new Direction();
         this._DIST      = new Vec2();
-        this._SPEED     = new Vec2();
+        this._SPEED     = new Vec2F();
         this._BOX       = ( descriptor._BOX == null ) ? new Box() : new Box( descriptor._BOX );
     }
 
