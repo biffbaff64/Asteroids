@@ -41,8 +41,8 @@ spaceship
   index: -1
 ufo
   rotate: false
-  xy: 616, 43
-  size: 47, 39
-  orig: 47, 39
+  xy: 616, 31
+  size: 72, 51
+  orig: 72, 51
   offset: 0, 0
   index: -1

@@ -18,9 +18,10 @@ public class MainPlayer extends GdxSprite
 {
     private static final int PLAYER_X_SPEED = 12;
 
-    public boolean isHurting;
-    public boolean isMovingX;
-    public boolean isMovingY;
+    public ButtonInputHandler buttons;
+    public boolean            isHurting;
+    public boolean            isMovingX;
+    public boolean            isMovingY;
 
     private Direction previousDirection;
 
@@ -46,6 +47,7 @@ public class MainPlayer extends GdxSprite
         createBody( PhysicsBodyType.KINEMATIC );
 
         previousDirection = new Direction();
+        buttons           = new ButtonInputHandler();
 
         setup( true );
     }
@@ -65,15 +67,15 @@ public class MainPlayer extends GdxSprite
 
         strength = GameConstants.MAX_STRENGTH;
 
-        isMovingX   = false;
-        isMovingY   = false;
-        isRotating  = false;
-        isFlippedX  = false;
-        isFlippedY  = false;
-        canFlip     = true;
-        isDrawable  = true;
-        isHurting   = false;
-        isAnimating = false;
+        isMovingX       = false;
+        isMovingY       = false;
+        isRotating      = false;
+        isFlippedX      = false;
+        isFlippedY      = false;
+        canFlip         = true;
+        isDrawable      = true;
+        isHurting       = false;
+        isAnimating     = false;
 
         isSetupCompleted = true;
 
@@ -308,7 +310,7 @@ public class MainPlayer extends GdxSprite
                     lookingAt.set( direction );
                 }
 
-//                buttons.checkButtons();
+                buttons.checkButtons();
                 movePlayer();
             }
             break;
@@ -330,7 +332,7 @@ public class MainPlayer extends GdxSprite
             // State may have changed in checkButtons
             case _HURT:
             {
-//                buttons.checkButtons();
+                buttons.checkButtons();
 
                 if ( getActionState() == ActionStates._HURT )
                 {

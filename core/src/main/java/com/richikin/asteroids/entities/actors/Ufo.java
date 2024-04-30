@@ -78,6 +78,12 @@ public class Ufo extends GdxSprite
         sprite.setRegion( animFrames[ 0 ] );
     }
 
+    @Override
+    public void tidy( int index )
+    {
+        App.getEntityData().getManager( GraphicID._UFO_MANAGER ).free();
+    }
+
     private void updateUfo()
     {
         switch ( getActionState() )
@@ -91,8 +97,7 @@ public class Ufo extends GdxSprite
 
             case _RUNNING:
             {
-                if ( hasBeenOnScreen
-                    && !sprite.getBoundingRectangle().overlaps( App.getGameRenderer().getGameWindow() ) )
+                if ( hasBeenOnScreen && !App.getEntityUtils().isOnScreen( this ) )
                 {
                     setActionState( ActionStates._DEAD );
                 }
@@ -100,7 +105,7 @@ public class Ufo extends GdxSprite
                 {
                     getPhysicsBody().body.setLinearVelocity( ( speed.x * direction.x ), ( speed.y * direction.y ) );
 
-                    hasBeenOnScreen = sprite.getBoundingRectangle().overlaps( App.getGameRenderer().getGameWindow() );
+                    hasBeenOnScreen = App.getEntityUtils().isOnScreen( this );
                 }
             }
             break;

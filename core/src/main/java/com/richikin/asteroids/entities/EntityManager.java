@@ -4,9 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.richikin.asteroids.config.Settings;
 import com.richikin.asteroids.core.App;
-import com.richikin.asteroids.entities.managers.AsteroidManager;
 import com.richikin.asteroids.entities.managers.PlayerManager;
-import com.richikin.asteroids.entities.managers.UfoManager;
 import com.richikin.asteroids.entities.objects.GdxSprite;
 import com.richikin.asteroids.entities.utils.EntityStats;
 import com.richikin.asteroids.enums.ActionStates;
@@ -38,8 +36,8 @@ public class EntityManager implements Disposable
      */
     public void initialise()
     {
-        App.getEntityData().addManager( new AsteroidManager() );
-        App.getEntityData().addManager( new UfoManager() );
+//        App.getEntityData().addManager( new AsteroidManager() );
+//        App.getEntityData().addManager( new UfoManager() );
     }
 
     public void initialiseForLevel()

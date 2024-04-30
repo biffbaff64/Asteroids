@@ -264,10 +264,10 @@ public class GameRenderer implements Disposable
 
     public Rectangle getGameWindow()
     {
-        gameWindow.x      = spriteGameCamera.getPosition().x;
-        gameWindow.y      = spriteGameCamera.getPosition().y;
-        gameWindow.width  = spriteGameCamera.viewport.getScreenWidth();
-        gameWindow.height = spriteGameCamera.viewport.getScreenHeight();
+        gameWindow.x      = 0;
+        gameWindow.y      = 0;
+        gameWindow.width  = Gfx.GAME_VIEW_WIDTH;
+        gameWindow.height = Gfx.GAME_VIEW_HEIGHT;
 
         return gameWindow;
     }

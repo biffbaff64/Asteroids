@@ -68,7 +68,7 @@ public class Entities
                     "Ufo",
                     GraphicID.G_UFO, GraphicID._ENEMY,
                     GameAssets.UFO, GameAssets.UFO_FRAMES,
-                    new Vec2( 47, 39 ),
+                    new Vec2( 72, 51 ),
                     Animation.PlayMode.NORMAL
                 ),
         };

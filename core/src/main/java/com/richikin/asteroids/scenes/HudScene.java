@@ -22,8 +22,7 @@ public class HudScene implements Disposable
 {
     public static final int _VERY_LARGE_FONT_SIZE = 48;
     public static final int _LARGE_FONT_SIZE      = 35;
-    public static final int _MID_FONT_SIZE        = 25;
-    public static final int _SMALL_FONT_SIZE      = 18;
+    public static final int _SMALL_FONT_SIZE      = 25;
 
     public static final int _ROTATE_LEFT  = 0;
     public static final int _ROTATE_RIGHT = 1;
@@ -59,6 +58,7 @@ public class HudScene implements Disposable
     public Switch  buttonRotateRight;
     public Switch  buttonThrust;
     public Switch  buttonShoot;
+    public Switch  buttonPause;
 
     private Image[]    smallMan;
     private BitmapFont smallFont;
@@ -94,7 +94,7 @@ public class HudScene implements Disposable
 
             smallMan[ i ].setPosition
                 (
-                    ( displayPos[ _LIVES ][ _X ] + ( i * (displayPos[ _LIVES ][ _WIDTH ] + 10) ) ),
+                    ( displayPos[ _LIVES ][ _X ] + ( i * ( displayPos[ _LIVES ][ _WIDTH ] + 10 ) ) ),
                     ( Gfx.HUD_HEIGHT - displayPos[ _LIVES ][ _Y ] )
                 );
 
@@ -173,6 +173,14 @@ public class HudScene implements Disposable
         drawPanels();
         drawItems();
         drawMessages();
+
+        String str = "[RL:" + buttonRotateLeft.isPressed() + "]"
+            + "[RR:" + buttonRotateRight.isPressed() + "]"
+            + "[SH:" + buttonShoot.isPressed() + "]"
+            + "[TH:" + buttonThrust.isPressed() + "]";
+
+        smallFont.setColor( Color.WHITE );
+        smallFont.draw( App.getSpriteBatch(), str, 20, 20 );
     }
 
     public void refillItems()
@@ -195,7 +203,7 @@ public class HudScene implements Disposable
     {
         bigFont.setColor( Color.WHITE );
         bigFont.draw( App.getSpriteBatch(),
-            String.format( Locale.UK, "%08d", App.getGameManager().score.getTotal()),
+            String.format( Locale.UK, "%08d", App.getGameManager().score.getTotal() ),
             displayPos[ _SCORE ][ _X ],
             Gfx.HUD_HEIGHT - displayPos[ _SCORE ][ _Y ] );
     }
@@ -224,6 +232,10 @@ public class HudScene implements Disposable
         }
     }
 
+    public void releaseDirectionButtons()
+    {
+    }
+
     public void enableHUDButtons()
     {
     }
@@ -232,9 +244,9 @@ public class HudScene implements Disposable
     {
         FontUtils fontUtils = new FontUtils();
 
-        bigFont   = fontUtils.createFont( "advanced_pixel-7.TTF", _VERY_LARGE_FONT_SIZE );
-        midFont   = fontUtils.createFont( "advanced_pixel-7.TTF", _LARGE_FONT_SIZE );
-        smallFont = fontUtils.createFont( "advanced_pixel-7.TTF", _SMALL_FONT_SIZE );
+        bigFont   = fontUtils.createFont( GameAssets.MODENINE_FONT, _VERY_LARGE_FONT_SIZE );
+        midFont   = fontUtils.createFont( GameAssets.MODENINE_FONT, _LARGE_FONT_SIZE );
+        smallFont = fontUtils.createFont( GameAssets.MODENINE_FONT, _SMALL_FONT_SIZE );
     }
 
     /**

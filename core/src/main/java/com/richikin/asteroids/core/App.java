@@ -16,6 +16,7 @@ import com.richikin.asteroids.entities.utils.AnimationUtils;
 import com.richikin.asteroids.entities.utils.EntityUtils;
 import com.richikin.asteroids.enums.StateID;
 import com.richikin.asteroids.graphics.renderers.GameRenderer;
+import com.richikin.asteroids.input.InputManager;
 import com.richikin.asteroids.physics.Box2DHelper;
 import com.richikin.asteroids.scenes.HudScene;
 import com.richikin.asteroids.scenes.MainScene;
@@ -35,9 +36,9 @@ public class App
     private static AppConfig      appConfig;
     private static StateManager   appState;
     private static MainScene      mainScene;
-    private static TitleScene  titleScene;
-    private static Box2DHelper box2DHelper;
-    private static Assets      assets;
+    private static TitleScene     titleScene;
+    private static Box2DHelper    box2DHelper;
+    private static Assets         assets;
     private static SpriteBatch    spriteBatch;
     private static GameManager    gameManager;
     private static Entities       entities;
@@ -49,6 +50,7 @@ public class App
     private static Stage          stage;
     private static MainPlayer     mainPlayer;
     private static PanelManager   panelManager;
+    private static InputManager   inputManager;
 
     // ------------------------------------------------------------------------
     // CODE
@@ -76,6 +78,7 @@ public class App
         box2DHelper  = new Box2DHelper();
         gameRenderer = new GameRenderer();
         gameManager  = new GameManager();
+        inputManager = new InputManager();
     }
 
     public static void createMainSceneObjects()
@@ -144,6 +147,7 @@ public class App
     public static SpriteBatch           getSpriteBatch()            {  return spriteBatch;          }
     public static AnimationUtils        getAnimationUtils()         {  return animationUtils;       }
     public static PanelManager          getPanelManager()           {  return panelManager;         }
+    public static InputManager          getInputManager()           {  return inputManager;         }
     //@formatter:on
     // ------------------------------------------------
 

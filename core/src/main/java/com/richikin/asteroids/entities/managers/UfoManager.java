@@ -43,6 +43,12 @@ public class UfoManager extends BasicEntityManager
             create();
 
             activateDelay = 30000 + ( MathUtils.random( 100 ) * 10 );
+
+            if ( MathUtils.random(100 ) < 65 )
+            {
+                activateDelay += activateDelay;
+            }
+
             activateTimer.reset();
         }
     }
@@ -84,7 +90,7 @@ public class UfoManager extends BasicEntityManager
         descriptor._DIST.x = Gfx.GAME_VIEW_WIDTH;
         descriptor._DIST.y = 0;
 
-        descriptor._SPEED.x = MathUtils.random( 2.0f ) + 2.5f;
+        descriptor._SPEED.x = MathUtils.random( 2.0f ) + 4.5f;
         descriptor._SPEED.y = 0;
     }
 }

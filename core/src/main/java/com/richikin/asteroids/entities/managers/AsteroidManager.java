@@ -95,7 +95,5 @@ public class AsteroidManager extends BasicEntityManager
 
         descriptor._SPEED.x = MathUtils.random( 2.0f ) + 2.5f;
         descriptor._SPEED.y = MathUtils.random( 2.0f ) + 2.5f;
-
-        descriptor.debug();
     }
 }

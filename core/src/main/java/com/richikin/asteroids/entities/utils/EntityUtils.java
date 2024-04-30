@@ -55,14 +55,18 @@ public class EntityUtils
         switch ( graphicID )
         {
             case G_BIG_ASTEROID:
+            case G_MID_ASTEROID:
+            case G_SMALL_ASTEROID:
+            case G_UFO:
             {
                 zed = 3;
             }
             break;
 
+            case G_PLAYER_WEAPON:
             case G_PLAYER:
             {
-                zed = 2;
+                zed = 1;
             }
             break;
 

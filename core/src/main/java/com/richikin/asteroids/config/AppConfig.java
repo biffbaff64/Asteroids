@@ -109,6 +109,7 @@ public class AppConfig
         App.getGameRenderer().createCameras();
         App.createStage( App.getGameRenderer().getHudGameCamera().viewport );
         App.getBox2DHelper().createB2DRenderer();
+        App.getInputManager().setup();
 
         startupState = StateID._STATE_END_STARTUP;
 

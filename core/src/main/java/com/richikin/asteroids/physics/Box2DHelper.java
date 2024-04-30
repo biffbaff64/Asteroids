@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.richikin.asteroids.core.App;
 import com.richikin.asteroids.graphics.Gfx;
+import com.richikin.asteroids.utils.Developer;
 import com.richikin.asteroids.utils.Trace;
 
 public class Box2DHelper implements Disposable
@@ -64,7 +65,7 @@ public class Box2DHelper implements Disposable
 
     public void drawDebugMatrix()
     {
-//        if ( ( b2dr != null ) && Developer.isDevMode() && canDrawDebug )
+        if ( ( b2dr != null ) && Developer.isDevMode() && canDrawDebug )
         {
             // Care needed here if the viewport sizes for SpriteGameCamera
             // and TiledGameCamera are different.

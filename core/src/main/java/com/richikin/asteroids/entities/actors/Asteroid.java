@@ -73,7 +73,7 @@ public class Asteroid extends GdxSprite
         isDrawable = true;
 
         isRotating  = true;
-        rotateSpeed = 0.5f;
+        rotateSpeed = 0.5f * asteroidType + 1;
 
         isSetupCompleted = true;
 
@@ -106,6 +106,12 @@ public class Asteroid extends GdxSprite
     public void animate()
     {
         sprite.setRegion( animFrames[ asteroidType ] );
+    }
+
+    @Override
+    public void tidy( int index )
+    {
+        App.getEntityData().getManager( GraphicID._ASTEROID_MANAGER ).free();
     }
 
     private void updateAsteroid()
